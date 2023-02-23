@@ -1,0 +1,13 @@
+{
+  "app": "Quizify",
+  "templateDashboard": {
+    "title": {
+      "de-DE": "Bitte wählen Sie ein Template",
+      "en-US": "Choose your Template"
+    },
+    "newTemplate": {
+      "de-DE": "Neues Template erstellen",
+      "en-US": "Create new template"
+    }
+  }
+}
