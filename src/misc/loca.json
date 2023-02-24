@@ -8,6 +8,18 @@
     "newTemplate": {
       "de-DE": "Neues Template erstellen",
       "en-US": "Create new template"
+    },
+    "closeModalHint": {
+      "de-DE": "Fenster schließen",
+      "en-US": "Close modal"
+    },
+    "createNewTemplateTitle": {
+      "de-DE": "Wie soll dein Template heißen?",
+      "en-US": "Whats your template name?"
+    },
+    "createNewTemplateButton": {
+      "de-DE": "Neues Template erstellen",
+      "en-US": "Create new template"
     }
   }
 }
