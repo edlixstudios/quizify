@@ -3,11 +3,13 @@ import { CreateNewTemplate, TemplatePicker } from "@/components/templateCards";
 import useSWR from "swr";
 import { useTemplates } from "@/store/templates";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 export default function AppRoot() {
     const loca = useLoca();
     const templates = useTemplates((state) => state.templates);
     const getAllTemplates = useTemplates((state) => state.getAllTemplates);
+    const router = useRouter();
 
     const { isLoading } = useSWR("templates", async () => {
         await getAllTemplates();
@@ -36,7 +38,12 @@ export default function AppRoot() {
             >
                 <CreateNewTemplate />
                 {templates?.map((e) => (
-                    <TemplatePicker key={e.id} title={e.title} id={e.id} />
+                    <TemplatePicker
+                        key={e.id}
+                        title={e.title}
+                        id={e.id}
+                        user={router.query.user as string}
+                    />
                 ))}
             </div>
         </div>

@@ -8,6 +8,8 @@ import { useModal } from "@/store/modal";
 import { Button, Input } from "./util/formComponents";
 import { useTemplates } from "@/store/templates";
 import Link from "next/link";
+import { MdConstruction } from "react-icons/md";
+import { useTemplateFetch } from "@/hooks/template";
 
 export const CreateNewTemplate = () => {
     const loca = useLoca();
@@ -138,19 +140,31 @@ function TemplateModal() {
 export interface TemplatePicker {
     title: string;
     id: string;
+    user: string;
 }
-export const TemplatePicker = ({ title, id }: TemplatePicker) => {
+export const TemplatePicker = ({ title, id, user }: TemplatePicker) => {
     const [randomNumber, _] = useState<number>(
         Math.floor(Math.random() * Object.keys(colorPicker).length)
     );
 
-    console.log("Random", randomNumber);
+    const loca = useLoca();
+    const template = useTemplateFetch(id);
 
     return (
         <Link
-            href={`/app/${id}`}
-            className={`h-[15rem] w-[11rem] rounded-xl shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
+            href={template?.finish ? `/app/${user}/${id}/` : `/app/${user}/${id}/construction/`}
+            className={`h-[15rem] w-[11rem] rounded-xl overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
         >
+            {!template?.finish && (
+                <div
+                    className={
+                        "relative rotate-[25deg] shadow-md flex items-center justify-center gap-2 text-sky-50 translate-x-10 translate-y-4  text-center bg-sky-500"
+                    }
+                >
+                    {loca.localization.templateDashboard.templateUnfinished[loca.language]}{" "}
+                    <MdConstruction />
+                </div>
+            )}
             <p
                 className={
                     "h-full text-2xl font-bold p-4 flex flex-col justify-center items-center"

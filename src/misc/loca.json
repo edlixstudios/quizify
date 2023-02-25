@@ -20,6 +20,16 @@
     "createNewTemplateButton": {
       "de-DE": "Neues Template erstellen",
       "en-US": "Create new template"
+    },
+    "templateUnfinished": {
+      "de-DE": "Unfertig",
+      "en-US": "Unfinished"
+    }
+  },
+  "constructionTemplate": {
+    "hamburgerButton": {
+      "de-DE": "Seitennavigation",
+      "en-US": "Sidebar"
     }
   }
 }

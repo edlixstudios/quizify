@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 
-interface Template {
+export interface Template {
     id: string;
     title: string;
+    finish: boolean;
     template: {};
 }
 
@@ -25,6 +26,7 @@ export class TemplateClass {
         return {
             id: this.uuid,
             title: this.templateName,
+            finish: false,
             template: {},
         };
     }
