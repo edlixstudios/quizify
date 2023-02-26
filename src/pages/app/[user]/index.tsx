@@ -1,30 +1,31 @@
-import { useLoca } from "@/hooks/loca";
-import { CreateNewTemplate, TemplatePicker } from "@/components/templateCards";
-import useSWR from "swr";
-import { useTemplates } from "@/store/templates";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useLoca } from "root/hooks/loca";
+import { CreateNewTemplate, TemplatePicker } from "root/components/templateCards";
+import { useTemplates } from "root/store/templates";
 import { useRouter } from "next/router";
+import useSWR from "swr";
+import LoadingSpinner from "root/components/util/loadingSpinner";
+import { GetServerSideProps } from "next";
 
-export default function AppRoot() {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {
+            userId: ctx.query.user ?? "default",
+        },
+    };
+};
+
+export default function AppRoot({ userId }: { userId: string }) {
     const loca = useLoca();
-    const templates = useTemplates((state) => state.templates);
-    const getAllTemplates = useTemplates((state) => state.getAllTemplates);
     const router = useRouter();
 
+    const templates = useTemplates((state) => state.templates);
+    const getAllTemplates = useTemplates((state) => state.getAllTemplates);
+
     const { isLoading } = useSWR("templates", async () => {
-        await getAllTemplates();
+        await getAllTemplates(userId);
     });
 
-    if (isLoading)
-        return (
-            <div
-                className={
-                    "w-screen h-screen fixed top-0 left-0 flex justify-center items-center text-7xl"
-                }
-            >
-                <AiOutlineLoading3Quarters className={"animate-spin text-sky-500"} />
-            </div>
-        );
+    if (isLoading) return <LoadingSpinner />;
 
     return (
         <div className={"p-16 h-screen grid grid-rows-3 text-slate-900"}>

@@ -2,8 +2,14 @@ import { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
 
 interface CustomInput extends ComponentPropsWithRef<"input"> {}
 
-export function Input({ ...props }: CustomInput) {
-    return <input className={`p-2 rounded-xl outline outline-sky-500 bg-sky-50`} {...props} />;
+export function Input({ ref, ...props }: CustomInput) {
+    return (
+        <input
+            ref={ref}
+            className={`p-2 rounded-xl outline outline-sky-500 bg-sky-50`}
+            {...props}
+        />
+    );
 }
 
 interface CustomButton extends ComponentPropsWithoutRef<"button"> {}

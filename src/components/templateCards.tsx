@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
-import { useLoca } from "@/hooks/loca";
+import { useLoca } from "root/hooks/loca";
 import { AiFillFileAdd } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
 import React, { useState } from "react";
 import ModalPortal, { FullScreenModal } from "./shared/modalPortal";
-import { useModal } from "@/store/modal";
+import { useModal } from "root/store/modal";
 import { Button, Input } from "./util/formComponents";
-import { useTemplates } from "@/store/templates";
+import { useTemplates } from "root/store/templates";
 import Link from "next/link";
 import { MdConstruction } from "react-icons/md";
-import { useTemplateFetch } from "@/hooks/template";
+import { useTemplateFetch } from "root/hooks/template";
+import { useRouter } from "next/router";
+import LoadingSpinner from "./util/loadingSpinner";
 
 export const CreateNewTemplate = () => {
     const loca = useLoca();
@@ -49,6 +51,7 @@ export const CreateNewTemplate = () => {
 
 function TemplateModal() {
     const setShowModal = useModal((state) => state.setShowModal);
+    const router = useRouter();
     const loca = useLoca();
     const [templateName, setTemplateName] = useState<string>("");
     const getAllTemplates = useTemplates((state) => state.getAllTemplates);
@@ -63,9 +66,11 @@ function TemplateModal() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        await createTemplate(templateName);
+        const userId = router.query.user as string;
+
+        await createTemplate(templateName, userId);
+        await getAllTemplates(userId);
         setTemplateName("");
-        await getAllTemplates();
         setShowModal(false);
     }
 
@@ -142,37 +147,53 @@ export interface TemplatePicker {
     id: string;
     user: string;
 }
+
 export const TemplatePicker = ({ title, id, user }: TemplatePicker) => {
     const [randomNumber, _] = useState<number>(
         Math.floor(Math.random() * Object.keys(colorPicker).length)
     );
+    const [showLoading, setShowLoading] = useState<boolean>(false);
 
     const loca = useLoca();
-    const template = useTemplateFetch(id);
+    const template = useTemplateFetch(user, id);
+
+    function onClickHandler() {
+        setShowLoading(true);
+    }
 
     return (
-        <Link
-            href={template?.finish ? `/app/${user}/${id}/` : `/app/${user}/${id}/construction/`}
-            className={`h-[15rem] w-[11rem] rounded-xl overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
-        >
-            {!template?.finish && (
-                <div
+        <>
+            <Link
+                onClick={onClickHandler}
+                href={template?.finish ? `/app/${user}/${id}/` : `/app/${user}/${id}/construction/`}
+                className={`h-[15rem] w-[11rem] rounded-xl overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
+            >
+                {!template?.finish && (
+                    <div
+                        className={
+                            "relative rotate-[25deg] shadow-md flex items-center justify-center gap-2 text-sky-50 translate-x-10 translate-y-4  text-center bg-sky-500"
+                        }
+                    >
+                        {loca.localization.templateDashboard.templateUnfinished[loca.language]}
+                        <MdConstruction />
+                    </div>
+                )}
+                <p
                     className={
-                        "relative rotate-[25deg] shadow-md flex items-center justify-center gap-2 text-sky-50 translate-x-10 translate-y-4  text-center bg-sky-500"
+                        "h-full text-2xl font-bold p-4 flex flex-col justify-center items-center"
                     }
                 >
-                    {loca.localization.templateDashboard.templateUnfinished[loca.language]}{" "}
-                    <MdConstruction />
-                </div>
+                    {title}
+                </p>
+            </Link>
+            {showLoading && (
+                <ModalPortal>
+                    <FullScreenModal shaded>
+                        <LoadingSpinner />
+                    </FullScreenModal>
+                </ModalPortal>
             )}
-            <p
-                className={
-                    "h-full text-2xl font-bold p-4 flex flex-col justify-center items-center"
-                }
-            >
-                {title}
-            </p>
-        </Link>
+        </>
     );
 };
 

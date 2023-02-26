@@ -1,9 +1,8 @@
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useGetSessionId } from "root/hooks/sessionData";
 
 export default function Home() {
-    const session = useSession();
-    const userId = (session.data?.user as { id: string })?.id ?? "default";
+    const userId = useGetSessionId();
 
     return (
         <>

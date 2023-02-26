@@ -1,13 +1,13 @@
-import { TemplatePicker } from "@/components/templateCards";
-import { TemplateClass } from "@/lib/templateClass";
+import { TemplatePicker } from "root/components/templateCards";
+import { FullTemplate, TemplateClass } from "root/lib/templateClass";
 import localforage from "localforage";
 import { create } from "zustand";
 
 interface Template {
     templates: TemplatePicker[];
-    createTemplate: (title: string) => Promise<void>;
+    createTemplate: (title: string, userId: string) => Promise<void>;
     returnTemplates: () => Promise<TemplatePicker[]>;
-    getAllTemplates: () => Promise<void>;
+    getAllTemplates: (userId: string) => Promise<void>;
 }
 
 async function fetchAllKeys() {
@@ -24,14 +24,55 @@ async function fetchAllKeys() {
 
 export const useTemplates = create<Template>((set) => ({
     templates: [],
-    createTemplate: async (title) => {
+    createTemplate: async (title, userId) => {
         const template = new TemplateClass(title);
 
-        await localforage.setItem(template.getUuid(), template.generateTemplate());
+        if (userId === "default") {
+            await localforage.setItem(template.getUuid(), template.generateTemplate());
+        } else {
+            await fetch(`${location.origin}/api/templates/${userId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(template.generateTemplate()),
+            });
+        }
     },
     returnTemplates: fetchAllKeys,
-    getAllTemplates: async () => {
-        const templateData = await fetchAllKeys();
+    getAllTemplates: async function (userId) {
+        let templateData: TemplatePicker[];
+
+        if (userId === "default") {
+            templateData = await fetchAllKeys();
+        } else {
+            templateData = await (await fetch(`${location.origin}/api/templates/${userId}`)).json();
+        }
+
         set((prev) => ({ ...prev, templates: templateData }));
+    },
+}));
+
+interface ActiveTemplate {
+    activeTemplate: FullTemplate | null;
+    fetchActiveTemplate: (userId: string, templateId: string) => void;
+    setActiveTemplate: (template: FullTemplate) => void;
+}
+
+export const useActiveTemplate = create<ActiveTemplate>((set) => ({
+    activeTemplate: null,
+    fetchActiveTemplate: async function (userId, templateId) {
+        let fetchedTemplate: FullTemplate;
+        if (userId === "default") {
+            fetchedTemplate = (await localforage.getItem(templateId)) as FullTemplate;
+        } else {
+            fetchedTemplate = (await (
+                await fetch(`${location.origin}/api/templates/${userId}/${templateId}`)
+            ).json()) as FullTemplate;
+        }
+        set((prev) => ({ ...prev, activeTemplate: fetchedTemplate }));
+    },
+    setActiveTemplate: function (template) {
+        set((prev) => ({ ...prev, activeTemplate: template }));
     },
 }));

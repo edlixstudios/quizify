@@ -30,6 +30,22 @@
     "hamburgerButton": {
       "de-DE": "Seitennavigation",
       "en-US": "Sidebar"
+    },
+    "promiseMessage": {
+      "updateTitle": {
+        "success": {
+          "de-DE": "Titel erfolgreich aktuallisiert",
+          "en-US": "Title successfully updated"
+        },
+        "loading": {
+          "de-DE": "Aktualliere Titel",
+          "en-US": "Updating title"
+        },
+        "error": {
+          "de-DE": "Fehler beim aktualliseren des Titels",
+          "en-US": "Error on updating title"
+        }
+      }
     }
   }
 }

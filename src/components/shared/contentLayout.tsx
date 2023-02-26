@@ -7,7 +7,7 @@ interface ContentLayout {
 export default function ContentLayout({ children }: ContentLayout) {
     return (
         <div className={"p-8"}>
-            <div className={" container mx-auto"}>{children}</div>
+            <div className={"container mx-auto"}>{children}</div>
         </div>
     );
 }
