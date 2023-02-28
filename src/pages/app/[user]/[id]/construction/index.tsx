@@ -24,7 +24,7 @@ const TemplatePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
         <>
             <Header />
             <ContentLayout>
-                <div>{id}</div>
+                <div>Eddy geht diese eine mal richtig gut ab Blja</div>
             </ContentLayout>
         </>
     );

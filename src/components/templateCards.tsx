@@ -28,7 +28,7 @@ export const CreateNewTemplate = () => {
             <button
                 onClick={handleOnClick}
                 className={
-                    " bg-slate-100 h-[15rem] w-[11rem] rounded-xl shadow-sm transition-all group xl:hover:scale-105 xl:hover:bg-slate-200 xl:hover:shadow-xl"
+                    " bg-slate-100 h-[15rem] w-[11rem] rounded-md shadow-sm transition-all group xl:hover:scale-105 xl:hover:bg-slate-200 xl:hover:shadow-xl"
                 }
             >
                 <div className={"h-full p-4 flex flex-col items-center"}>
@@ -84,7 +84,7 @@ function TemplateModal() {
                 <motion.div
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
-                    className="bg-slate-50 rounded-xl shadow-xl p-4 w-full h-[15rem] xl:w-1/2"
+                    className="bg-slate-50 rounded-md shadow-xl p-4 w-full h-[15rem] xl:w-1/2"
                 >
                     <div className={"h-full flex flex-col "}>
                         <div className={"flex items-center "}>
@@ -97,7 +97,7 @@ function TemplateModal() {
                             </p>
                             <button
                                 className={
-                                    "p-2 rounded-xl transition-color group xl:hover:bg-rose-300 "
+                                    "p-2 rounded-md transition-color group xl:hover:bg-rose-300 "
                                 }
                                 title={
                                     loca.localization.templateDashboard.closeModalHint[
@@ -166,7 +166,7 @@ export const TemplatePicker = ({ title, id, user }: TemplatePicker) => {
             <Link
                 onClick={onClickHandler}
                 href={template?.finish ? `/app/${user}/${id}/` : `/app/${user}/${id}/construction/`}
-                className={`h-[15rem] w-[11rem] rounded-xl overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
+                className={`h-[15rem] w-[11rem] rounded-md overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
             >
                 {!template?.finish && (
                     <div
