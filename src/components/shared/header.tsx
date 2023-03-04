@@ -133,7 +133,10 @@ export function LandingPageHeader() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink href={"/api/auth/signin"} variant={"gradient"}>
+                        <NavLink href={"/signin"} variant={"gradient"}>
+                            {loca.localization.landingPage.header.signIn[loca.language]}
+                        </NavLink>
+                        <NavLink href={"/signin"} variant={"gradient"}>
                             {loca.localization.landingPage.header.signIn[loca.language]}
                         </NavLink>
                     </div>
@@ -155,7 +158,7 @@ export function NavLink({
     if (variant === "gradient")
         return (
             <Link
-                className={` rounded-md bg-gradient-to-b ${MAIN_GRADIENT} p-3 font-bold text-blue-50 shadow-md ${MAIN_GRADIENT_HOVER}`}
+                className={` rounded-md bg-gradient-to-b ${MAIN_GRADIENT} p-3 font-bold text-blue-50 shadow-md shadow-sky-500/50 ${MAIN_GRADIENT_HOVER}`}
                 href={href}
             >
                 {children}
