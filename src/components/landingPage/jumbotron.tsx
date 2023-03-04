@@ -30,7 +30,7 @@ export default function Jumbotron() {
                 </span>
             </div>
             <TextWrapper>
-                <div className={"text-center text-xl md:my-16 "}>
+                <div className={"text-center text-xl md:my-8 "}>
                     Vero amet diam takimata amet eos facilisi facer eos feugiat voluptua. Tincidunt
                     et ipsum eirmod sed wisi dolores eirmod amet at diam sadipscing et sed. Enim
                     takimata consequat

@@ -126,7 +126,7 @@ function TemplateModal() {
                                         setTemplateName(e.target.value);
                                     }}
                                 />
-                                <Button type={"submit"} className={"bg-sky-500 "}>
+                                <Button type={"submit"} className={"bg-sky-500 text-sky-50"}>
                                     {
                                         loca.localization.templateDashboard.createNewTemplateButton[
                                             loca.language

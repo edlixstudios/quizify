@@ -111,5 +111,35 @@
         "en-US": "minutes"
       }
     }
+  },
+  "signInPage": {
+    "title": {
+      "de-DE": "Mache hier eins Login",
+      "en-US": "Register here biatch"
+    },
+    "email": {
+      "de-DE": "Email",
+      "en-US": "Email"
+    },
+    "password": {
+      "de-DE": "Passwort",
+      "en-US": "Password"
+    },
+    "signInButton": {
+      "de-DE": "Anmelden",
+      "en-US": "Sign In"
+    },
+    "free": {
+      "de-DE": "Quizify starten",
+      "en-US": "Start quizify"
+    },
+    "dividerOr": {
+      "de-DE": "oder",
+      "en-US": "OR"
+    },
+    "dividerProvider": {
+      "de-DE": "über Anbieter anmelden",
+      "en-US": "Sign in with Provider"
+    }
   }
 }

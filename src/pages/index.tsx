@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { useGetSessionId } from "root/hooks/sessionData";
 import { LandingPageHeader } from "root/components/shared/header";
 import { GetStaticProps } from "next";
 import Jumbotron from "root/components/landingPage/jumbotron";
@@ -18,15 +16,17 @@ export default function Home() {
     const session = useSession();
     const router = useRouter();
 
-    if (session.status === "authenticated") {
-        router.push(`/app/${(session.data.user as { id: string }).id}/`);
+    // if (session.status === "authenticated") {
+    //     router.push(`/app/${(session.data.user as { id: string }).id}/`);
 
-        return <LoadingSpinner />;
-    }
+    //     return <LoadingSpinner />;
+    // }
 
     return (
         <>
             <LandingPageHeader />
+            <Jumbotron />
+            <LandingPageSection variant={"dark"}>Bam bam bam</LandingPageSection>
             <Jumbotron />
             <LandingPageSection variant={"dark"}>Bam bam bam</LandingPageSection>
         </>

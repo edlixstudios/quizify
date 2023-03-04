@@ -52,7 +52,9 @@ export default function AppRoot({ userId }: { userId: string }) {
             <div className={"fixed bottom-10 right-10"}>
                 <button
                     onClick={async () => {
-                        await signOut({ redirect: false });
+                        if (userId !== "default") {
+                            await signOut({ redirect: false });
+                        }
                         router.push("/");
                     }}
                     className={
