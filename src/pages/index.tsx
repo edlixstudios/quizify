@@ -1,20 +1,34 @@
 import Link from "next/link";
 import { useGetSessionId } from "root/hooks/sessionData";
 import { LandingPageHeader } from "root/components/shared/header";
-import Head from "next/head";
+import { GetStaticProps } from "next";
+import Jumbotron from "root/components/landingPage/jumbotron";
+import LandingPageSection from "root/components/landingPage/section";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import LoadingSpinner from "root/components/util/loadingSpinner";
+
+export const getStaticProps: GetStaticProps = () => {
+    return {
+        props: {},
+    };
+};
 
 export default function Home() {
-  const userId = useGetSessionId();
+    const session = useSession();
+    const router = useRouter();
 
-  return (
-    <>
-      <LandingPageHeader />
-      <div className={"bg-slate-900 h-[25rem] mb-64"} id={"features"}>
-        <Link href={`/app/${userId}`}>Aha</Link>
-      </div>
-      <div className={"bg-slate-900 h-[25rem] mt-64"} id={"prices"}>
-        <Link href={`/app/${userId}`}>Aha</Link>
-      </div>
-    </>
-  );
+    if (session.status === "authenticated") {
+        router.push(`/app/${(session.data.user as { id: string }).id}/`);
+
+        return <LoadingSpinner />;
+    }
+
+    return (
+        <>
+            <LandingPageHeader />
+            <Jumbotron />
+            <LandingPageSection variant={"dark"}>Bam bam bam</LandingPageSection>
+        </>
+    );
 }

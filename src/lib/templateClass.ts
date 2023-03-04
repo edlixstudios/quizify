@@ -4,6 +4,7 @@ export interface FullTemplate {
     id: string;
     title: string;
     finish: boolean;
+    userId?: string;
     template: {};
 }
 

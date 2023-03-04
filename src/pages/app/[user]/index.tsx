@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import LoadingSpinner from "root/components/util/loadingSpinner";
 import { GetServerSideProps } from "next";
+import { BiLogOut } from "react-icons/bi";
+import { signOut } from "next-auth/react";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -46,6 +48,20 @@ export default function AppRoot({ userId }: { userId: string }) {
                         user={router.query.user as string}
                     />
                 ))}
+            </div>
+            <div className={"fixed bottom-10 right-10"}>
+                <button
+                    onClick={async () => {
+                        await signOut({ redirect: false });
+                        router.push("/");
+                    }}
+                    className={
+                        "flex items-center gap-4 p-2 bg-rose-300 rounded-md text-rose-900 xl:hover:bg-rose-400"
+                    }
+                >
+                    <p className={"font-bold"}>Logout</p>
+                    <BiLogOut />
+                </button>
             </div>
         </div>
     );

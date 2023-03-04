@@ -1,5 +1,5 @@
 import ContentLayout from "root/components/shared/contentLayout";
-import { AppHeader } from "root/components/shared/header";
+import AppHeader from "root/components/shared/header";
 import { GetServerSideProps, NextPage } from "next/types";
 import useSWR from "swr";
 import LoadingSpinner from "root/components/util/loadingSpinner";
@@ -24,7 +24,7 @@ const TemplatePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
         <>
             <AppHeader />
             <ContentLayout>
-                <div>Eddy geht diese eine mal richtig gut ab Blja</div>
+                <div>{id}</div>
             </ContentLayout>
         </>
     );

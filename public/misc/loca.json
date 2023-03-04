@@ -63,12 +63,53 @@
       "questions": {
         "de-DE": "Fragen",
         "en-US": "Questions"
+      },
+      "dashboard": {
+        "de-DE": "Template Sammlung",
+        "en-US": "Dashboard"
+      },
+      "isDone": {
+        "de-DE": "Als unfertig markieren",
+        "en-US": "Mark as undone"
+      },
+      "isNotDone": {
+        "de-DE": "Als fertig markieren",
+        "en-US": "Mark as done"
       }
     }
   },
   "landingPage": {
     "header": {
-
+      "feature": {
+        "de-DE": "Features",
+        "en-US": "Features"
+      },
+      "prices": {
+        "de-DE": "Preis",
+        "en-US": "Price"
+      },
+      "signIn": {
+        "de-DE": "Anmelden",
+        "en-US": "Sign In"
+      }
+    },
+    "body": {
+      "jumboTitleP1": {
+        "de-DE": "Erstelle",
+        "en-US": "Create"
+      },
+      "jumboTitleP2": {
+        "de-DE": "atemberaubende Quize",
+        "en-US": "stunning quizes"
+      },
+      "jumboTitleP3": {
+        "de-DE": "innerhalb von",
+        "en-US": "within"
+      },
+      "jumboTitleP4": {
+        "de-DE": "Minuten",
+        "en-US": "minutes"
+      }
     }
   }
 }

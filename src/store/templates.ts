@@ -72,7 +72,21 @@ export const useActiveTemplate = create<ActiveTemplate>((set) => ({
         }
         set((prev) => ({ ...prev, activeTemplate: fetchedTemplate }));
     },
-    setActiveTemplate: function (template) {
+    setActiveTemplate: async function (template) {
+        if (template.userId === "default") {
+            await localforage.setItem(template.id, template);
+        } else {
+            const response = await (
+                await fetch(`${location.origin}/api/templates/${template.userId}/${template.id}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(template),
+                })
+            ).json();
+        }
+
         set((prev) => ({ ...prev, activeTemplate: template }));
     },
 }));
