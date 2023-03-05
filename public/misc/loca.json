@@ -1,0 +1,243 @@
+{
+  "app": "Quizify",
+  "templateDashboard": {
+    "title": {
+      "de-DE": "Bitte wählen Sie ein Template",
+      "en-US": "Choose your Template"
+    },
+    "newTemplate": {
+      "de-DE": "Neues Template erstellen",
+      "en-US": "Create new template"
+    },
+    "closeModalHint": {
+      "de-DE": "Fenster schließen",
+      "en-US": "Close modal"
+    },
+    "createNewTemplateTitle": {
+      "de-DE": "Wie soll dein Template heißen?",
+      "en-US": "Whats your template name?"
+    },
+    "createNewTemplateButton": {
+      "de-DE": "Neues Template erstellen",
+      "en-US": "Create new template"
+    },
+    "templateUnfinished": {
+      "de-DE": "Unfertig",
+      "en-US": "Unfinished"
+    }
+  },
+  "constructionTemplate": {
+    "hamburgerButton": {
+      "de-DE": "Seitennavigation",
+      "en-US": "Sidebar"
+    },
+    "promiseMessage": {
+      "updateTitle": {
+        "success": {
+          "de-DE": "Titel erfolgreich aktuallisiert",
+          "en-US": "Title successfully updated"
+        },
+        "loading": {
+          "de-DE": "Aktualliere Titel",
+          "en-US": "Updating title"
+        },
+        "error": {
+          "de-DE": "Fehler beim aktualliseren des Titels",
+          "en-US": "Error on updating title"
+        }
+      }
+    },
+    "sidebar": {
+      "title": {
+        "de-DE": "Menü",
+        "en-US": "Menue"
+      },
+      "backBtnHint": {
+        "de-DE": "Zurück",
+        "en-US": "Back"
+      },
+      "quizes": {
+        "de-DE": "Rätsel",
+        "en-US": "Quizes"
+      },
+      "questions": {
+        "de-DE": "Fragen",
+        "en-US": "Questions"
+      },
+      "dashboard": {
+        "de-DE": "Template Sammlung",
+        "en-US": "Dashboard"
+      },
+      "isDone": {
+        "de-DE": "Als unfertig markieren",
+        "en-US": "Mark as undone"
+      },
+      "isNotDone": {
+        "de-DE": "Als fertig markieren",
+        "en-US": "Mark as done"
+      }
+    }
+  },
+  "landingPage": {
+    "header": {
+      "feature": {
+        "de-DE": "Features",
+        "en-US": "Features"
+      },
+      "prices": {
+        "de-DE": "Preis",
+        "en-US": "Price"
+      },
+      "signIn": {
+        "de-DE": "Anmelden",
+        "en-US": "Sign In"
+      }
+    },
+    "body": {
+      "jumboTitleP1": {
+        "de-DE": "Erstelle",
+        "en-US": "Create"
+      },
+      "jumboTitleP2": {
+        "de-DE": "atemberaubende Quize",
+        "en-US": "stunning quizes"
+      },
+      "jumboTitleP3": {
+        "de-DE": "innerhalb von",
+        "en-US": "within"
+      },
+      "jumboTitleP4": {
+        "de-DE": "Minuten",
+        "en-US": "minutes"
+      },
+      "price": {
+        "priceTitle": {
+          "de-DE": "Kleiner Preis, für große Features",
+          "en-US": "Small price for big features"
+        },
+        "priceSubTitle": {
+          "de-DE": "Erstelle lokal kostenlos so viele Quizzes wie du willst",
+          "en-US": "Create local as much quizzes you want for free"
+        },
+        "free": {
+          "title": {
+            "de-DE": "Kostenlos",
+            "en-US": "Free"
+          },
+          "subTitle": {
+            "de-DE": "Starter",
+            "en-US": "Starter"
+          },
+          "desc": {
+            "de-DE": "Perfekt solange die Quizzes an einem Rechner durchgeführt werden",
+            "en-US": "Perfeclty if you use one device for your quizzes"
+          },
+          "button": {
+            "de-DE": "Starte direkt los",
+            "en-US": "Start right now"
+          },
+          "features": {
+            "de-DE": [
+              "Gestalte eigene Quizzes",
+              "Unbegrenzt lokale Quizze erstellen"
+            ],
+            "en-US": [
+              "Design own quizzes",
+              "Unlimited local quizzes"
+            ]
+          }
+        },
+        "medium": {
+          "title": {
+            "de-DE": "4€ / Monat",
+            "en-US": "4$ / Month"
+          },
+          "subTitle": {
+            "de-DE": "Quiz Enthusiast",
+            "en-US": "Quiz Enthusiast"
+          },
+          "desc": {
+            "de-DE": "Nutzt die Power der Cloud und sei Geräte unabhängig",
+            "en-US": "Use the power of the cloud and stay device independent"
+          },
+          "button": {
+            "de-DE": "Melde dich an",
+            "en-US": "Sign in"
+          },
+          "features": {
+            "de-DE": [
+              "Alle Features von Starter",
+              "Speicher 5 Quizzes in der Cloud",
+              "Nutze Bilder in deinen Quizzes"
+            ],
+            "en-US": [
+              "All features of starter",
+              "Save 5 quizzes to the cloud",
+              "Use images in your quizzes"
+            ]
+          }
+        },
+        "large": {
+          "title": {
+            "de-DE": "10€ / Monat",
+            "en-US": "10$ / Month"
+          },
+          "subTitle": {
+            "de-DE": "Quiz Master",
+            "en-US": "Quiz Master"
+          },
+          "desc": {
+            "de-DE": "Tob dich aus und erstelle so viele Quizze wie du willst",
+            "en-US": "Go wild and create as many quizzes as you want"
+          },
+          "button": {
+            "de-DE": "Melde dich an",
+            "en-US": "Sign in"
+          },
+          "features": {
+            "de-DE": [
+              "Alle Features von Quiz Enthusiast",
+              "Unbegrenzt Quizze in der Cloud abspeichern",
+              "Nutze Videos in Quizze"
+            ],
+            "en-US": [
+              "All features of Quiz Enthusiast",
+              "Unlimited quizzes in the cloud",
+              "Use videos in your quizzes"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "signInPage": {
+    "title": {
+      "de-DE": "Mache hier eins Login",
+      "en-US": "Register here biatch"
+    },
+    "email": {
+      "de-DE": "Email",
+      "en-US": "Email"
+    },
+    "password": {
+      "de-DE": "Passwort",
+      "en-US": "Password"
+    },
+    "signInButton": {
+      "de-DE": "Anmelden",
+      "en-US": "Sign In"
+    },
+    "free": {
+      "de-DE": "Quizify starten",
+      "en-US": "Start quizify"
+    },
+    "dividerOr": {
+      "de-DE": "oder",
+      "en-US": "OR"
+    },
+    "dividerProvider": {
+      "de-DE": "über Anbieter anmelden",
+      "en-US": "Sign in with Provider"
+    }
+  }
+}

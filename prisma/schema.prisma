@@ -10,6 +10,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Test {
-  id String @id @default(uuid())
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String?
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  provider      String?
+  accounts      Account[]
+  templates     Template[]
+}
+
+model Template {
+  id       String  @id @default(uuid())
+  userId   String
+  title    String
+  finish   Boolean
+  template Json
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

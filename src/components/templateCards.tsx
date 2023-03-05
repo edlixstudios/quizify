@@ -1,13 +1,17 @@
 import { motion } from "framer-motion";
-import { useLoca } from "@/hooks/loca";
+import { useLoca } from "root/hooks/loca";
 import { AiFillFileAdd } from "react-icons/ai";
 import { ImCross } from "react-icons/im";
 import React, { useState } from "react";
 import ModalPortal, { FullScreenModal } from "./shared/modalPortal";
-import { useModal } from "@/store/modal";
+import { useModal } from "root/store/modal";
 import { Button, Input } from "./util/formComponents";
-import { useTemplates } from "@/store/templates";
+import { useTemplates } from "root/store/templates";
 import Link from "next/link";
+import { MdConstruction } from "react-icons/md";
+import { useTemplateFetch } from "root/hooks/template";
+import { useRouter } from "next/router";
+import LoadingSpinner from "./util/loadingSpinner";
 
 export const CreateNewTemplate = () => {
     const loca = useLoca();
@@ -24,7 +28,7 @@ export const CreateNewTemplate = () => {
             <button
                 onClick={handleOnClick}
                 className={
-                    " bg-slate-100 h-[15rem] w-[11rem] rounded-xl shadow-sm transition-all group xl:hover:scale-105 xl:hover:bg-slate-200 xl:hover:shadow-xl"
+                    " bg-slate-100 h-[15rem] w-[11rem] rounded-md shadow-sm transition-all group xl:hover:scale-105 xl:hover:bg-slate-200 xl:hover:shadow-xl"
                 }
             >
                 <div className={"h-full p-4 flex flex-col items-center"}>
@@ -47,6 +51,7 @@ export const CreateNewTemplate = () => {
 
 function TemplateModal() {
     const setShowModal = useModal((state) => state.setShowModal);
+    const router = useRouter();
     const loca = useLoca();
     const [templateName, setTemplateName] = useState<string>("");
     const getAllTemplates = useTemplates((state) => state.getAllTemplates);
@@ -61,9 +66,11 @@ function TemplateModal() {
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        await createTemplate(templateName);
+        const userId = router.query.user as string;
+
+        await createTemplate(templateName, userId);
+        await getAllTemplates(userId);
         setTemplateName("");
-        await getAllTemplates();
         setShowModal(false);
     }
 
@@ -75,9 +82,9 @@ function TemplateModal() {
                 className="w-full h-full p-8 flex justify-center items-center"
             >
                 <motion.div
-                    initial={{ scale: 0.5 }}
-                    animate={{ scale: 1 }}
-                    className="bg-slate-50 rounded-xl shadow-xl p-4 w-full h-[15rem] xl:w-1/2"
+                    initial={{ scale: 0.5, opacity: 0.8 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="bg-slate-50 rounded-md shadow-xl p-4 w-full h-[15rem] xl:w-1/2"
                 >
                     <div className={"h-full flex flex-col "}>
                         <div className={"flex items-center "}>
@@ -90,7 +97,7 @@ function TemplateModal() {
                             </p>
                             <button
                                 className={
-                                    "p-2 rounded-xl transition-color group xl:hover:bg-rose-300 "
+                                    "p-2 rounded-md transition-color group xl:hover:bg-rose-300 "
                                 }
                                 title={
                                     loca.localization.templateDashboard.closeModalHint[
@@ -119,7 +126,7 @@ function TemplateModal() {
                                         setTemplateName(e.target.value);
                                     }}
                                 />
-                                <Button type={"submit"} className={"bg-sky-500 "}>
+                                <Button type={"submit"} className={"bg-sky-500 text-sky-50"}>
                                     {
                                         loca.localization.templateDashboard.createNewTemplateButton[
                                             loca.language
@@ -138,27 +145,55 @@ function TemplateModal() {
 export interface TemplatePicker {
     title: string;
     id: string;
+    user: string;
 }
-export const TemplatePicker = ({ title, id }: TemplatePicker) => {
+
+export const TemplatePicker = ({ title, id, user }: TemplatePicker) => {
     const [randomNumber, _] = useState<number>(
         Math.floor(Math.random() * Object.keys(colorPicker).length)
     );
+    const [showLoading, setShowLoading] = useState<boolean>(false);
 
-    console.log("Random", randomNumber);
+    const loca = useLoca();
+    const template = useTemplateFetch(user, id);
+
+    function onClickHandler() {
+        setShowLoading(true);
+    }
 
     return (
-        <Link
-            href={`/app/${id}`}
-            className={`h-[15rem] w-[11rem] rounded-xl shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
-        >
-            <p
-                className={
-                    "h-full text-2xl font-bold p-4 flex flex-col justify-center items-center"
-                }
+        <>
+            <Link
+                onClick={onClickHandler}
+                href={template?.finish ? `/app/${user}/${id}/` : `/app/${user}/${id}/construction/`}
+                className={`h-[15rem] w-[11rem] rounded-md overflow-clip shadow-sm transition-all ${colorPicker[randomNumber]} group xl:hover:scale-105 xl:hover:shadow-xl`}
             >
-                {title}
-            </p>
-        </Link>
+                {!template?.finish && (
+                    <div
+                        className={
+                            "relative rotate-[25deg] shadow-md flex items-center justify-center gap-2 text-sky-50 translate-x-10 translate-y-4  text-center bg-sky-500"
+                        }
+                    >
+                        {loca.localization.templateDashboard.templateUnfinished[loca.language]}
+                        <MdConstruction />
+                    </div>
+                )}
+                <p
+                    className={
+                        "h-full text-2xl font-bold p-4 flex flex-col justify-center items-center"
+                    }
+                >
+                    {title}
+                </p>
+            </Link>
+            {showLoading && (
+                <ModalPortal>
+                    <FullScreenModal shaded>
+                        <LoadingSpinner />
+                    </FullScreenModal>
+                </ModalPortal>
+            )}
+        </>
     );
 };
 

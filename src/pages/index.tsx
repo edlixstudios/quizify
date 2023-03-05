@@ -1,15 +1,24 @@
-import Link from "next/link";
+import { LandingPageHeader } from "root/components/shared/header";
+import { GetStaticProps } from "next";
+import Jumbotron from "root/components/landingPage/jumbotron";
+import Price from "root/components/landingPage/price";
+import Feature from "root/components/landingPage/feature";
+import Footer from "root/components/shared/footer";
+
+export const getStaticProps: GetStaticProps = () => {
+    return {
+        props: {},
+    };
+};
 
 export default function Home() {
-  return (
-    <>
-      <div className={"h-screen bg-red-300 flex justify-center items-center"} >
-          <Link
-            href={"/app/"}
-          >
-              Aha
-          </Link>
-      </div>
-    </>
-  )
+    return (
+        <>
+            <LandingPageHeader />
+            <Jumbotron />
+            <Feature />
+            <Price />
+            <Footer />
+        </>
+    );
 }

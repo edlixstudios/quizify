@@ -1,15 +1,15 @@
-
-import loca from "@/misc/loca.json";
-import {useRouter} from "next/router";
+import loca from "public/misc/loca.json";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 type LanguageTypes = "de-DE" | "en-US";
 
 export const useLoca = () => {
-
     const router = useRouter();
+    const [localization, _] = useState<typeof loca>(loca);
 
-    return  {
-        localization: loca,
-        language: router.locale as LanguageTypes
-    }
-}
+    return {
+        localization: localization,
+        language: router.locale as LanguageTypes,
+    };
+};
