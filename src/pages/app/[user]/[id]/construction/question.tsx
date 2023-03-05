@@ -1,5 +1,5 @@
 import ContentLayout from "root/components/shared/contentLayout";
-import AppHeader from "root/components/shared/header";
+import { AppHeader } from "root/components/shared/header";
 import { GetServerSideProps, NextPage } from "next/types";
 import useSWR from "swr";
 import LoadingSpinner from "root/components/util/loadingSpinner";
