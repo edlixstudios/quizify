@@ -3,7 +3,12 @@ import { useRouter } from "next/router";
 import React, { ReactNode, useState } from "react";
 import { useLoca } from "root/hooks/loca";
 import LandingPageSection from "../landingPage/section";
-import { MAIN_GRADIENT, SECONDARY_GRADIENT } from "../shared/gradient";
+import {
+    MAIN_GRADIENT,
+    MAIN_GRADIENT_HOVER,
+    SECONDARY_GRADIENT,
+    SECONDARY_GRADIENT_HOVER,
+} from "../shared/gradient";
 import { Button, Input } from "../util/formComponents";
 import { AiFillGithub } from "react-icons/ai";
 
@@ -39,17 +44,17 @@ export const AuthForm = () => {
     return (
         <LandingPageSection variant={"light"}>
             <div className={"flex flex-col items-center"}>
-                <div className={"p-8 font-bold md:text-3xl"}>
+                <div className={"p-8 font-bold  md:text-3xl"}>
                     {localization.signInPage.title[language]}
                 </div>
                 <Button
                     onClick={startQuizfyLocal}
-                    className={` bg-gradient-to-b text-emerald-50 shadow-md w-1/3 shadow-emerald-500/50 ${SECONDARY_GRADIENT}`}
+                    className={` bg-gradient-to-b text-emerald-50 shadow-md w-2/3 text-base shadow-emerald-500/50 ${SECONDARY_GRADIENT} md:text-xl md:w-1/3  ${SECONDARY_GRADIENT_HOVER}`}
                 >
                     {localization.signInPage.free[language]}
                 </Button>
                 <Divider title={localization.signInPage.dividerOr[language]} />
-                <form className={"w-1/3 flex flex-col gap-4"} onSubmit={handleOnSubmit}>
+                <form className={"flex flex-col gap-4 w-2/3 md:w-1/3"} onSubmit={handleOnSubmit}>
                     <Input
                         required
                         placeholder={"max@mustermann.com"}
@@ -72,12 +77,12 @@ export const AuthForm = () => {
                     />
                     <Button
                         type={"submit"}
-                        className={` bg-gradient-to-b text-sky-50 shadow-md shadow-sky-500/50 ${MAIN_GRADIENT}`}
+                        className={` bg-gradient-to-b text-sky-50  shadow-md shadow-sky-500/50 text-base ${MAIN_GRADIENT} md:text-xl ${MAIN_GRADIENT_HOVER}`}
                     >
                         {localization.signInPage.signInButton[language]}
                     </Button>
                 </form>
-                <Divider title={localization.signInPage.dividerProvider[language]} />
+                <Divider title={localization.signInPage.dividerOr[language]} />
                 <ProviderButton
                     provider={"github"}
                     providerIcon={<AiFillGithub className={"w-6 h-6"} />}
@@ -89,11 +94,11 @@ export const AuthForm = () => {
 
 function Divider({ title }: { title: string }) {
     return (
-        <div className={`w-2/4 relative`}>
+        <div className={`w-3/4 relative md:w-2/4`}>
             <div className={`my-8 bg-slate-400 h-0.5 w-full`} />
             <div
                 className={
-                    "absolute bg-white p-1 font-inter bottom-4 origin-center left-1/2 -translate-x-1/2 select-none"
+                    "absolute bg-white p-1 w-fit text-xs font-inter bottom-5 origin-center left-1/2 -translate-x-1/2 select-none text-center md:text-xl md:bottom-4"
                 }
             >
                 {title}
@@ -116,7 +121,7 @@ export function ProviderButton({ provider, providerIcon }: ProviderButton) {
         <Button
             onClick={handleSignIn}
             type={"submit"}
-            className={` bg-gradient-to-b w-1/3 text-sky-50 shadow-md flex items-center gap-8 shadow-sky-500/50 ${MAIN_GRADIENT}`}
+            className={` bg-gradient-to-b w-2/3 text-sky-50 shadow-md flex items-center gap-8 shadow-sky-500/50 text-base ${MAIN_GRADIENT} md:text-xl md:w-1/3 ${MAIN_GRADIENT_HOVER}`}
         >
             <div className={"capitalize flex-grow"}>{provider}</div>
             {providerIcon}

@@ -8,12 +8,14 @@ export function Input({ ref, ...props }: CustomInput) {
     if (props.label) {
         return (
             <div className={"flex flex-col"}>
-                <label className={"indent-2 capitalize font-inter text-slate-600"}>
+                <label
+                    className={"indent-2 capitalize font-inter text-slate-600 text-sm md:text-xl"}
+                >
                     {props.label}
                 </label>
                 <input
                     ref={ref}
-                    className={`p-2 rounded-md border-2 border-slate-300 focus:outline-none focus:border-sky-600  `}
+                    className={`p-2 rounded-md border-2 border-slate-300 text-base focus:outline-none focus:border-sky-600 md:text-xl  `}
                     {...props}
                 />
             </div>
@@ -23,7 +25,7 @@ export function Input({ ref, ...props }: CustomInput) {
     return (
         <input
             ref={ref}
-            className={`p-2 rounded-md border-2 border-slate-300 focus:outline-none focus:border-sky-600  `}
+            className={`p-2 rounded-md border-2 border-slate-300 text-base focus:outline-none focus:border-sky-600 md:text-xl`}
             {...props}
         />
     );
