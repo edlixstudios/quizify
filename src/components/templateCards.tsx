@@ -82,8 +82,8 @@ function TemplateModal() {
                 className="w-full h-full p-8 flex justify-center items-center"
             >
                 <motion.div
-                    initial={{ scale: 0.5 }}
-                    animate={{ scale: 1 }}
+                    initial={{ scale: 0.5, opacity: 0.8 }}
+                    animate={{ scale: 1, opacity: 1 }}
                     className="bg-slate-50 rounded-md shadow-xl p-4 w-full h-[15rem] xl:w-1/2"
                 >
                     <div className={"h-full flex flex-col "}>

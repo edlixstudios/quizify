@@ -109,6 +109,104 @@
       "jumboTitleP4": {
         "de-DE": "Minuten",
         "en-US": "minutes"
+      },
+      "price": {
+        "priceTitle": {
+          "de-DE": "Kleiner Preis, für große Features",
+          "en-US": "Small price for big features"
+        },
+        "priceSubTitle": {
+          "de-DE": "Erstelle lokal kostenlos so viele Quizzes wie du willst",
+          "en-US": "Create local as much quizzes you want for free"
+        },
+        "free": {
+          "title": {
+            "de-DE": "Kostenlos",
+            "en-US": "Free"
+          },
+          "subTitle": {
+            "de-DE": "Starter",
+            "en-US": "Starter"
+          },
+          "desc": {
+            "de-DE": "Perfekt solange die Quizzes an einem Rechner durchgeführt werden",
+            "en-US": "Perfeclty if you use one device for your quizzes"
+          },
+          "button": {
+            "de-DE": "Starte direkt los",
+            "en-US": "Start right now"
+          },
+          "features": {
+            "de-DE": [
+              "Gestalte eigene Quizzes",
+              "Unbegrenzt lokale Quizze erstellen"
+            ],
+            "en-US": [
+              "Design own quizzes",
+              "Unlimited local quizzes"
+            ]
+          }
+        },
+        "medium": {
+          "title": {
+            "de-DE": "4€ / Monat",
+            "en-US": "4$ / Month"
+          },
+          "subTitle": {
+            "de-DE": "Quiz Enthusiast",
+            "en-US": "Quiz Enthusiast"
+          },
+          "desc": {
+            "de-DE": "Nutzt die Power der Cloud und sei Geräte unabhängig",
+            "en-US": "Use the power of the cloud and stay device independent"
+          },
+          "button": {
+            "de-DE": "Melde dich an",
+            "en-US": "Sign in"
+          },
+          "features": {
+            "de-DE": [
+              "Alle Features von Starter",
+              "Speicher 5 Quizzes in der Cloud",
+              "Nutze Bilder in deinen Quizzes"
+            ],
+            "en-US": [
+              "All features of starter",
+              "Save 5 quizzes to the cloud",
+              "Use images in your quizzes"
+            ]
+          }
+        },
+        "large": {
+          "title": {
+            "de-DE": "10€ / Monat",
+            "en-US": "10$ / Month"
+          },
+          "subTitle": {
+            "de-DE": "Quiz Master",
+            "en-US": "Quiz Master"
+          },
+          "desc": {
+            "de-DE": "Tob dich aus und erstelle so viele Quizze wie du willst",
+            "en-US": "Go wild and create as many quizzes as you want"
+          },
+          "button": {
+            "de-DE": "Melde dich an",
+            "en-US": "Sign in"
+          },
+          "features": {
+            "de-DE": [
+              "Alle Features von Quiz Enthusiast",
+              "Unbegrenzt Quizze in der Cloud abspeichern",
+              "Nutze Videos in Quizze"
+            ],
+            "en-US": [
+              "All features of Quiz Enthusiast",
+              "Unlimited quizzes in the cloud",
+              "Use videos in your quizzes"
+            ]
+          }
+        }
       }
     }
   },

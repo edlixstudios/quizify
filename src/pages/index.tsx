@@ -1,10 +1,9 @@
 import { LandingPageHeader } from "root/components/shared/header";
 import { GetStaticProps } from "next";
 import Jumbotron from "root/components/landingPage/jumbotron";
-import LandingPageSection from "root/components/landingPage/section";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import LoadingSpinner from "root/components/util/loadingSpinner";
+import Price from "root/components/landingPage/price";
+import Feature from "root/components/landingPage/feature";
+import Footer from "root/components/shared/footer";
 
 export const getStaticProps: GetStaticProps = () => {
     return {
@@ -13,22 +12,13 @@ export const getStaticProps: GetStaticProps = () => {
 };
 
 export default function Home() {
-    const session = useSession();
-    const router = useRouter();
-
-    // if (session.status === "authenticated") {
-    //     router.push(`/app/${(session.data.user as { id: string }).id}/`);
-
-    //     return <LoadingSpinner />;
-    // }
-
     return (
         <>
             <LandingPageHeader />
             <Jumbotron />
-            <LandingPageSection variant={"dark"}>Bam bam bam</LandingPageSection>
-            <Jumbotron />
-            <LandingPageSection variant={"dark"}>Bam bam bam</LandingPageSection>
+            <Feature />
+            <Price />
+            <Footer />
         </>
     );
 }

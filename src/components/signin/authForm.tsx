@@ -7,8 +7,13 @@ import { MAIN_GRADIENT, SECONDARY_GRADIENT } from "../shared/gradient";
 import { Button, Input } from "../util/formComponents";
 import { AiFillGithub } from "react-icons/ai";
 
+export interface AuthData {
+    email: string;
+    password: string;
+}
+
 export const AuthForm = () => {
-    const [authData, setAuthData] = useState<{ email: string; password: string }>({
+    const [authData, setAuthData] = useState<AuthData>({
         email: "",
         password: "",
     });
@@ -18,7 +23,11 @@ export const AuthForm = () => {
 
     async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const signInResponse = await signIn("credentials", { authData });
+        const signInResponse = await signIn("credentials", {
+            email: authData.email,
+            password: authData.password,
+            redirect: false,
+        });
 
         console.log("Sign in", signInResponse);
     }

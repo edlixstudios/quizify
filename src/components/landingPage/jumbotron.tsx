@@ -9,7 +9,7 @@ export default function Jumbotron() {
         <LandingPageSection variant="light">
             <div
                 className={
-                    "font-bold text-slate-800 leading-tight text-center text-4xl p-12 md:text-6xl md:px-44"
+                    "font-bold text-slate-800 leading-tight text-center text-4xl p-12 md:text-6xl "
                 }
             >
                 {loca.localization.landingPage.body.jumboTitleP1[loca.language]}{" "}
@@ -41,5 +41,5 @@ export default function Jumbotron() {
 }
 
 export const TextWrapper = ({ children }: { children: ReactNode }) => {
-    return <div className={"leading-normaltext-slate-800 px-12 xl:px-64"}>{children}</div>;
+    return <div className={"leading-normaltext-slate-800 mb-8 px-12 xl:px-64"}>{children}</div>;
 };

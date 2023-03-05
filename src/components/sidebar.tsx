@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
 import { useLoca } from "root/hooks/loca";
 import { AiFillStepBackward } from "react-icons/ai";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdQuiz, MdDashboardCustomize, MdDoneAll, MdOutlineRemoveDone } from "react-icons/md";
-import { signOut } from "next-auth/react";
-import { toast } from "react-hot-toast";
-import { useGetSessionId } from "root/hooks/sessionData";
 import { useActiveTemplate } from "root/store/templates";
 
 interface Sidebar {

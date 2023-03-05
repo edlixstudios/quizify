@@ -136,9 +136,6 @@ export function LandingPageHeader() {
                         <NavLink href={"/signin"} variant={"gradient"}>
                             {loca.localization.landingPage.header.signIn[loca.language]}
                         </NavLink>
-                        <NavLink href={"/signin"} variant={"gradient"}>
-                            {loca.localization.landingPage.header.signIn[loca.language]}
-                        </NavLink>
                     </div>
                 </div>
             </nav>

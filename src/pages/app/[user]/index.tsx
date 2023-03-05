@@ -23,14 +23,14 @@ export default function AppRoot({ userId }: { userId: string }) {
     const templates = useTemplates((state) => state.templates);
     const getAllTemplates = useTemplates((state) => state.getAllTemplates);
 
-    const { isLoading } = useSWR("templates", async () => {
+    const { isLoading } = useSWR(`templates/${userId}`, async () => {
         await getAllTemplates(userId);
     });
 
     if (isLoading) return <LoadingSpinner />;
 
     return (
-        <div className={"p-16 h-screen grid grid-rows-3 text-slate-900"}>
+        <div className={"p-16 h-screen grid grid-rows-3 text-slate-800"}>
             <div className={" font-bold text-center text-4xl xl:text-6xl"}>
                 {loca.localization.templateDashboard.title[loca.language]}
             </div>
