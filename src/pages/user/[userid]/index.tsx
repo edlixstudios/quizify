@@ -1,15 +1,15 @@
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
+import UserPageLayout from "root/components/layout/userPage";
+import { UserPageSidebar } from "root/components/sidebar";
 import { useSubscription } from "root/store/subscription";
-import SubscriptionProvider from "root/subscription/subsciptionProvider";
 
 const UserPage: NextPage = () => {
     const subscriptionId = useSubscription((state) => state.subscriptionId);
 
     const router = useRouter();
 
-    return <></>;
+    return <UserPageLayout>Main</UserPageLayout>;
 };
 
 export default UserPage;

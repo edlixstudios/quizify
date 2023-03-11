@@ -4,8 +4,17 @@ import { AiFillStepBackward, AiFillDelete } from "react-icons/ai";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MdQuiz, MdDashboardCustomize, MdDoneAll, MdOutlineRemoveDone } from "react-icons/md";
+import {
+    MdQuiz,
+    MdDashboardCustomize,
+    MdDoneAll,
+    MdOutlineRemoveDone,
+    MdSpaceDashboard,
+} from "react-icons/md";
 import { useActiveTemplate, useTemplates } from "root/store/templates";
+import { useSession } from "next-auth/react";
+import { MAIN_GRADIENT } from "./shared/gradient";
+import { FaUserAlt } from "react-icons/fa";
 
 interface Sidebar {
     closeSidebar: () => void;
@@ -95,15 +104,15 @@ interface SidebarButton {
     icon?: ReactNode;
 }
 
-function SidebarButton({ href, children, icon = null }: SidebarButton) {
+export function SidebarButton({ href, children, icon = undefined }: SidebarButton) {
     const router = useRouter();
     const isPath = router.asPath === href;
 
     return (
         <li
-            className={`text-slate-900 font-bold p-2 rounded-md group transition-colors ${
-                isPath ? "bg-slate-200" : ""
-            } xl:hover:bg-slate-300 `}
+            className={` font-bold p-2 rounded-md group transition-colors ${
+                isPath ? "bg-slate-200 text-slate-900" : "text-slate-500"
+            } xl:hover:bg-slate-300 xl:hover:text-slate-900 `}
         >
             <Link className={"flex items-center"} href={href}>
                 <div className={"flex-grow text-center"}>{children}</div>
@@ -198,5 +207,31 @@ function DeleteTemplate() {
                 </div>
             </button>
         </li>
+    );
+}
+
+export function UserPageSidebar() {
+    const session = useSession();
+    const router = useRouter();
+    const { localization, language } = useLoca();
+
+    return (
+        <motion.aside className={"h-screen w-64 shadow-xl"}>
+            <div
+                className={`font-bold p-8 bg-gradient-to-r text-sky-50 text-center drop-shadow-md ${MAIN_GRADIENT}  text-2xl mx-auto`}
+            >
+                {localization.app}
+            </div>
+            <ul className={"p-4"}>
+                <SidebarButton
+                    href={`/user/${router.query.userid}`}
+                    icon={<MdSpaceDashboard className={"h-6 w-6"} />}
+                >{`${localization.userPage.dashboard[language]}`}</SidebarButton>
+                <SidebarButton
+                    href={`/user/${router.query.userid}/account`}
+                    icon={<FaUserAlt className={"h-6 w-6"} />}
+                >{`${localization.userPage.user[language]}`}</SidebarButton>
+            </ul>
+        </motion.aside>
     );
 }

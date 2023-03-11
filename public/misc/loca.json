@@ -1,5 +1,5 @@
 {
-  "app": "Quizify",
+  "app": "Quizfy",
   "templateDashboard": {
     "title": {
       "de-DE": "Bitte wählen Sie ein Template",
@@ -242,6 +242,16 @@
     "dividerProvider": {
       "de-DE": "über Anbieter anmelden",
       "en-US": "Sign in with Provider"
+    }
+  },
+  "userPage": {
+    "dashboard": {
+      "de-DE": "Hauptseite",
+      "en-US": "Dashboard"
+    },
+    "user": {
+      "de-DE": "Account",
+      "en-US": "Account"
     }
   }
 }
