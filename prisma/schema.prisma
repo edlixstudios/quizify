@@ -30,15 +30,17 @@ model Account {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  provider      String?
-  accounts      Account[]
-  templates     Template[]
+  id              String     @id @default(cuid())
+  name            String?
+  email           String?    @unique
+  password        String?
+  emailVerified   DateTime?
+  image           String?
+  provider        String?
+  hasSubscription Boolean    @default(false)
+  accounts        Account[]
+  templates       Template[]
+  payments        Payment[]
 }
 
 model Template {
@@ -47,6 +49,19 @@ model Template {
   title    String
   finish   Boolean
   template Json
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id              Int      @id @default(autoincrement())
+  userId          String
+  orderId         String
+  paymentId       String
+  planId          String
+  status          String
+  billingTime     DateTime
+  nextBillingTime DateTime
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

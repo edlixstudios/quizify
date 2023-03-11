@@ -11,6 +11,7 @@ import {
 } from "../shared/gradient";
 import { Button, Input } from "../util/formComponents";
 import { AiFillGithub } from "react-icons/ai";
+import { FullScreenModalWithLoadingSpinner } from "../shared/modalPortal";
 
 export interface AuthData {
     email: string;
@@ -18,28 +19,7 @@ export interface AuthData {
 }
 
 export const AuthForm = () => {
-    const [authData, setAuthData] = useState<AuthData>({
-        email: "",
-        password: "",
-    });
-
     const { localization, language } = useLoca();
-    const router = useRouter();
-
-    async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const signInResponse = await signIn("credentials", {
-            email: authData.email,
-            password: authData.password,
-            redirect: false,
-        });
-
-        console.log("Sign in", signInResponse);
-    }
-
-    function startQuizfyLocal() {
-        router.push("/app/default");
-    }
 
     return (
         <LandingPageSection variant={"light"}>
@@ -47,46 +27,11 @@ export const AuthForm = () => {
                 <div className={"p-8 font-bold  md:text-3xl"}>
                     {localization.signInPage.title[language]}
                 </div>
-                <Button
-                    onClick={startQuizfyLocal}
-                    className={` bg-gradient-to-b text-emerald-50 shadow-md w-2/3 text-base shadow-emerald-500/50 ${SECONDARY_GRADIENT} md:text-xl md:w-1/3  ${SECONDARY_GRADIENT_HOVER}`}
-                >
-                    {localization.signInPage.free[language]}
-                </Button>
+                <StartAppLocal />
                 <Divider title={localization.signInPage.dividerOr[language]} />
-                <form className={"flex flex-col gap-4 w-2/3 md:w-1/3"} onSubmit={handleOnSubmit}>
-                    <Input
-                        required
-                        placeholder={"max@mustermann.com"}
-                        value={authData.email}
-                        label={localization.signInPage.email[language]}
-                        type={"email"}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setAuthData((prev) => ({ ...prev, email: e.target.value }));
-                        }}
-                    />
-                    <Input
-                        required
-                        placeholder={"***SuperSecretPassword***"}
-                        value={authData.password}
-                        label={localization.signInPage.password[language]}
-                        type={"password"}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setAuthData((prev) => ({ ...prev, password: e.target.value }));
-                        }}
-                    />
-                    <Button
-                        type={"submit"}
-                        className={` bg-gradient-to-b text-sky-50  shadow-md shadow-sky-500/50 text-base ${MAIN_GRADIENT} md:text-xl ${MAIN_GRADIENT_HOVER}`}
-                    >
-                        {localization.signInPage.signInButton[language]}
-                    </Button>
-                </form>
+                <CredentialsGroup />
                 <Divider title={localization.signInPage.dividerOr[language]} />
-                <ProviderButton
-                    provider={"github"}
-                    providerIcon={<AiFillGithub className={"w-6 h-6"} />}
-                />
+                <ProviderGroup />
             </div>
         </LandingPageSection>
     );
@@ -94,7 +39,7 @@ export const AuthForm = () => {
 
 function Divider({ title }: { title: string }) {
     return (
-        <div className={`w-3/4 relative md:w-2/4`}>
+        <div className={`w-3/4 relative md:w-1/4`}>
             <div className={`my-8 bg-slate-400 h-0.5 w-full`} />
             <div
                 className={
@@ -104,6 +49,89 @@ function Divider({ title }: { title: string }) {
                 {title}
             </div>
         </div>
+    );
+}
+
+export function StartAppLocal() {
+    const router = useRouter();
+    const { localization, language } = useLoca();
+
+    const [isAppLoading, setIsAppLoading] = useState<boolean>(false);
+    function startQuizfyLocal() {
+        setIsAppLoading(true);
+        router.push("/app/default");
+    }
+
+    if (isAppLoading) {
+        return <FullScreenModalWithLoadingSpinner />;
+    }
+
+    return (
+        <Button
+            onClick={startQuizfyLocal}
+            className={` bg-gradient-to-b text-emerald-50 shadow-md w-2/3 text-base shadow-emerald-500/50 ${SECONDARY_GRADIENT} md:text-xl md:w-1/3  ${SECONDARY_GRADIENT_HOVER}`}
+        >
+            {localization.signInPage.free[language]}
+        </Button>
+    );
+}
+
+export function CredentialsGroup() {
+    const [authData, setAuthData] = useState<AuthData>({
+        email: "",
+        password: "",
+    });
+    const { localization, language } = useLoca();
+
+    async function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        await signIn("credentials", {
+            email: authData.email,
+            password: authData.password,
+            redirect: false,
+        });
+    }
+
+    return (
+        <form className={"flex flex-col gap-4 w-2/3 md:w-1/3"} onSubmit={handleOnSubmit}>
+            <Input
+                required
+                placeholder={"max@mustermann.com"}
+                value={authData.email}
+                label={localization.signInPage.email[language]}
+                type={"email"}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAuthData((prev) => ({ ...prev, email: e.target.value }));
+                }}
+            />
+            <Input
+                required
+                placeholder={"***SuperSecretPassword***"}
+                value={authData.password}
+                label={localization.signInPage.password[language]}
+                type={"password"}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAuthData((prev) => ({ ...prev, password: e.target.value }));
+                }}
+            />
+            <Button
+                type={"submit"}
+                className={` bg-gradient-to-b text-sky-50  shadow-md shadow-sky-500/50 text-base ${MAIN_GRADIENT} md:text-xl ${MAIN_GRADIENT_HOVER}`}
+            >
+                {localization.signInPage.signInButton[language]}
+            </Button>
+        </form>
+    );
+}
+
+export function ProviderGroup() {
+    return (
+        <>
+            <ProviderButton
+                provider={"github"}
+                providerIcon={<AiFillGithub className={"w-6 h-6"} />}
+            />
+        </>
     );
 }
 

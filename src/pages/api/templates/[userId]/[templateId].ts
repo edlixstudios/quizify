@@ -11,7 +11,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case "PUT":
             await putHandler(req, res);
             break;
+        case "DELETE":
+            await deleteHandler(req, res);
+            break;
     }
+}
+
+async function deleteHandler(req: NextApiRequest, res: NextApiResponse) {
+    const { templateId } = req.query as { templateId: string };
+
+    const template = await prisma?.template.delete({
+        where: {
+            id: templateId,
+        },
+    });
+
+    res.send({ a: "B" });
 }
 
 async function getHandler(req: NextApiRequest, res: NextApiResponse) {

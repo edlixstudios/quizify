@@ -3,9 +3,18 @@ import { MAIN_GRADIENT_DARK, MAIN_GRADIENT_LIGHT } from "../shared/gradient";
 import { Button } from "../util/formComponents";
 import LandingPageSection from "./section";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { useState } from "react";
+import { FullScreenModalWithLoadingSpinner } from "../shared/modalPortal";
+import { useRouter } from "next/router";
 
 export default function Price() {
     const { localization, language } = useLoca();
+    const [staringApp, setStartingApp] = useState<boolean>(false);
+    const router = useRouter();
+
+    if (staringApp) {
+        return <FullScreenModalWithLoadingSpinner />;
+    }
 
     return (
         <LandingPageSection variant={"light"}>
@@ -26,7 +35,10 @@ export default function Price() {
                         priceClassDesc={localization.landingPage.body.price.free.desc[language]}
                         buttonText={localization.landingPage.body.price.free.button[language]}
                         featureList={localization.landingPage.body.price.free.features[language]}
-                        onClick={() => {}}
+                        onClick={() => {
+                            router.push("/app/default");
+                            setStartingApp(true);
+                        }}
                     />
                     <PriceSection
                         colorVarian={"highlight"}
@@ -35,7 +47,9 @@ export default function Price() {
                         priceClassDesc={localization.landingPage.body.price.medium.desc[language]}
                         buttonText={localization.landingPage.body.price.medium.button[language]}
                         featureList={localization.landingPage.body.price.medium.features[language]}
-                        onClick={() => {}}
+                        onClick={() => {
+                            router.push("/signin");
+                        }}
                     />
                     <PriceSection
                         colorVarian={"default"}
@@ -44,7 +58,9 @@ export default function Price() {
                         priceClassDesc={localization.landingPage.body.price.large.desc[language]}
                         buttonText={localization.landingPage.body.price.large.button[language]}
                         featureList={localization.landingPage.body.price.large.features[language]}
-                        onClick={() => {}}
+                        onClick={() => {
+                            router.push("/signin");
+                        }}
                     />
                 </div>
             </div>

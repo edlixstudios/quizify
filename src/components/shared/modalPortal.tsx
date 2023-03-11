@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import ReactDOM from "react-dom";
+import LoadingSpinner from "../util/loadingSpinner";
 
 interface ModalPortal {
     children: ReactNode;
@@ -19,5 +20,15 @@ export function FullScreenModal({ children, shaded = false }: FullScreenModal) {
         <div className={`w-screen h-screen fixed top-0 left-0 ${shaded ? "bg-slate-900/25" : ""}`}>
             {children}
         </div>
+    );
+}
+
+export function FullScreenModalWithLoadingSpinner() {
+    return (
+        <ModalPortal>
+            <div className={`w-screen h-screen fixed top-0 left-0 bg-white`}>
+                <LoadingSpinner />
+            </div>
+        </ModalPortal>
     );
 }

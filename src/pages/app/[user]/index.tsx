@@ -7,6 +7,7 @@ import LoadingSpinner from "root/components/util/loadingSpinner";
 import { GetServerSideProps } from "next";
 import { BiLogOut } from "react-icons/bi";
 import { signOut } from "next-auth/react";
+import IsValidUserProvider from "root/components/isValidUserProvider";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -30,41 +31,43 @@ export default function AppRoot({ userId }: { userId: string }) {
     if (isLoading) return <LoadingSpinner />;
 
     return (
-        <div className={"p-16 h-screen grid grid-rows-3 text-slate-800"}>
-            <div className={" font-bold text-center text-4xl xl:text-6xl"}>
-                {loca.localization.templateDashboard.title[loca.language]}
-            </div>
-            <div
-                className={
-                    "row-span-2 m-auto gap-8 flex flex-col xl:items-center xl:flex-row xl:flex-wrap"
-                }
-            >
-                <CreateNewTemplate />
-                {templates?.map((e) => (
-                    <TemplatePicker
-                        key={e.id}
-                        title={e.title}
-                        id={e.id}
-                        user={router.query.user as string}
-                    />
-                ))}
-            </div>
-            <div className={"fixed bottom-10 right-10"}>
-                <button
-                    onClick={async () => {
-                        if (userId !== "default") {
-                            await signOut({ redirect: false });
-                        }
-                        router.push("/");
-                    }}
+        <IsValidUserProvider>
+            <div className={"p-16 h-screen grid grid-rows-3 text-slate-800"}>
+                <div className={" font-bold text-center text-4xl xl:text-6xl"}>
+                    {loca.localization.templateDashboard.title[loca.language]}
+                </div>
+                <div
                     className={
-                        "flex items-center gap-4 p-2 bg-rose-300 rounded-md text-rose-900 xl:hover:bg-rose-400"
+                        "row-span-2 m-auto gap-8 flex flex-col xl:items-center xl:flex-row xl:flex-wrap"
                     }
                 >
-                    <p className={"font-bold"}>Logout</p>
-                    <BiLogOut />
-                </button>
+                    <CreateNewTemplate />
+                    {templates?.map((e) => (
+                        <TemplatePicker
+                            key={e.id}
+                            title={e.title}
+                            id={e.id}
+                            user={router.query.user as string}
+                        />
+                    ))}
+                </div>
+                <div className={"fixed bottom-10 right-10"}>
+                    <button
+                        onClick={async () => {
+                            if (userId !== "default") {
+                                await signOut({ redirect: false });
+                            }
+                            router.push("/");
+                        }}
+                        className={
+                            "flex items-center gap-4 p-2 bg-rose-300 rounded-md text-rose-900 xl:hover:bg-rose-400"
+                        }
+                    >
+                        <p className={"font-bold"}>Logout</p>
+                        <BiLogOut />
+                    </button>
+                </div>
             </div>
-        </div>
+        </IsValidUserProvider>
     );
 }

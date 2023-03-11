@@ -56,6 +56,14 @@ export const authOptions: AuthOptions = {
         async session({ session, user, token }) {
             (session.user as { id: string }).id = token.sub!;
 
+            const userData = await prisma.user.findFirst({
+                where: {
+                    id: token.sub,
+                },
+            });
+            (session.user as { hasSubscription: boolean }).hasSubscription =
+                userData?.hasSubscription!;
+
             return session;
         },
         async jwt({ token, user, account, profile, isNewUser }) {

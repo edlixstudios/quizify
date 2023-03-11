@@ -8,6 +8,7 @@ interface Template {
     createTemplate: (title: string, userId: string) => Promise<void>;
     returnTemplates: () => Promise<TemplatePicker[]>;
     getAllTemplates: (userId: string) => Promise<void>;
+    deleteTemplate: (userId: string, templateId: string) => void;
 }
 
 async function fetchAllKeys() {
@@ -51,6 +52,17 @@ export const useTemplates = create<Template>((set) => ({
 
         set((prev) => ({ ...prev, templates: templateData }));
     },
+    deleteTemplate: async function (userId, templateId) {
+        if (userId === "default") {
+            await localforage.removeItem(templateId);
+        } else {
+            await (
+                await fetch(`${location.origin}/api/templates/${userId}/${templateId}`, {
+                    method: "DELETE",
+                })
+            ).json();
+        }
+    },
 }));
 
 interface ActiveTemplate {
@@ -73,7 +85,7 @@ export const useActiveTemplate = create<ActiveTemplate>((set) => ({
         set((prev) => ({ ...prev, activeTemplate: fetchedTemplate }));
     },
     setActiveTemplate: async function (template) {
-        if (template.userId === "default") {
+        if (!template.userId || template.userId === "default") {
             await localforage.setItem(template.id, template);
         } else {
             const response = await (

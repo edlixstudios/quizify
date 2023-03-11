@@ -13,7 +13,11 @@ const SignInPage: NextPage = () => {
     const router = useRouter();
 
     if (session.status === "authenticated") {
-        router.push(`/app/${(session.data.user as { id: string }).id}`);
+        if ((session.data.user as { hasSubscription: boolean }).hasSubscription) {
+            router.push(`/app/${(session.data.user as { id: string }).id}`);
+        } else {
+            router.push(`/user/${(session.data.user as { id: string }).id}`);
+        }
 
         return <LoadingSpinner />;
     }

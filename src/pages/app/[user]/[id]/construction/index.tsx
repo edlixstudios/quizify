@@ -4,6 +4,7 @@ import { GetServerSideProps, NextPage } from "next/types";
 import useSWR from "swr";
 import LoadingSpinner from "root/components/util/loadingSpinner";
 import { useActiveTemplate } from "root/store/templates";
+import IsValidUserProvider from "root/components/isValidUserProvider";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -22,10 +23,12 @@ const TemplatePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
 
     return (
         <>
-            <AppHeader />
-            <ContentLayout>
-                <div>Eddy geht diese eine mal richtig gut ab Blja</div>
-            </ContentLayout>
+            <IsValidUserProvider>
+                <AppHeader />
+                <ContentLayout>
+                    <div>Eddy geht diese eine mal richtig gut ab Blja</div>
+                </ContentLayout>
+            </IsValidUserProvider>
         </>
     );
 };

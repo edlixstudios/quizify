@@ -72,6 +72,7 @@ function TemplateModal() {
         await getAllTemplates(userId);
         setTemplateName("");
         setShowModal(false);
+        
     }
 
     return (

@@ -4,7 +4,7 @@ export interface FullTemplate {
     id: string;
     title: string;
     finish: boolean;
-    userId?: string;
+    userId: string;
     template: {};
 }
 
@@ -30,6 +30,7 @@ export class TemplateClass {
             id: this.uuid,
             title: this.templateName,
             finish: false,
+            userId: "default",
             template: {},
         };
     }

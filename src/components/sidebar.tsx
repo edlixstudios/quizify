@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useLoca } from "root/hooks/loca";
-import { AiFillStepBackward } from "react-icons/ai";
+import { AiFillStepBackward, AiFillDelete } from "react-icons/ai";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { MdQuiz, MdDashboardCustomize, MdDoneAll, MdOutlineRemoveDone } from "react-icons/md";
-import { useActiveTemplate } from "root/store/templates";
+import { useActiveTemplate, useTemplates } from "root/store/templates";
 
 interface Sidebar {
     closeSidebar: () => void;
@@ -44,7 +44,7 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                     </div>
                     <button
                         className={
-                            "p-1 rounded-md transition-all bg-slate-200 hover:xl:bg-slate-300 "
+                            "p-1 rounded-md transition-all bg-slate-200 drop-shadow-md hover:xl:bg-slate-300 "
                         }
                         onClick={() => setAnimationPosition(offsetPosition)}
                         title={
@@ -56,8 +56,8 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                         <AiFillStepBackward className={"text-slate-900"} />
                     </button>
                 </div>
-                <div className={"p-4 flex flex-col flex-grow justify-between"}>
-                    <ul>
+                <div className={"p-4 flex flex-col gap-8 flex-grow"}>
+                    <ul className={"drop-shadow-md"}>
                         <SidebarButton
                             icon={<MdDashboardCustomize className={"w-full h-full"} />}
                             href={`/app/${router.query.user}/${router.query.id}/construction`}
@@ -76,9 +76,12 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                         </SidebarButton>
                     </ul>
 
-                    <ul>
+                    <ul className={"drop-shadow-md"}>
                         <TemplateDoneButton />
                         <DashboardButton />
+                    </ul>
+                    <ul className={"flex-grow flex flex-col justify-end drop-shadow-md"}>
+                        <DeleteTemplate />
                     </ul>
                 </div>
             </motion.div>
@@ -167,6 +170,33 @@ function DashboardButton() {
                     <MdDashboardCustomize className={"w-full h-full"} />
                 </div>
             </Link>
+        </li>
+    );
+}
+
+function DeleteTemplate() {
+    const router = useRouter();
+    const { localization, language } = useLoca();
+    const deleteTemplate = useTemplates((state) => state.deleteTemplate);
+
+    async function deleteTemplateHandler() {
+        const { user, id: templateId } = router.query as { user: string; id: string };
+        await deleteTemplate(user, templateId);
+        router.push(`/app/${user}`);
+    }
+
+    return (
+        <li
+            className={`text-rose-900 font-bold p-2 bg-rose-300 rounded-md group transition-colors  xl:hover:bg-rose-400 `}
+        >
+            <button className={"flex items-center w-full"} onClick={deleteTemplateHandler}>
+                <div className={"flex-grow text-center"}>
+                    {localization.constructionTemplate.sidebar.delete[language]}
+                </div>
+                <div className={`mr-8 h-6 w-6 transition-colors   `}>
+                    <AiFillDelete className={"w-full h-full"} />
+                </div>
+            </button>
         </li>
     );
 }

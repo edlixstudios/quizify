@@ -75,6 +75,10 @@
       "isNotDone": {
         "de-DE": "Als fertig markieren",
         "en-US": "Mark as done"
+      },
+      "delete": {
+        "de-DE": "Template löschen",
+        "en-US": "Delete template"
       }
     }
   },
