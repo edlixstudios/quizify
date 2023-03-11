@@ -7,10 +7,15 @@ import { useRouter } from "next/router";
 import { FullTemplate } from "root/lib/templateClass";
 import { toast } from "react-hot-toast";
 import localforage from "localforage";
-import Sidebar from "../sidebar";
-import ModalPortal from "./modalPortal";
+import AppSidebar from "../sidebar";
+import ModalPortal, { FullScreenModal } from "./modalPortal";
 import Link from "next/link";
-import { MAIN_GRADIENT, MAIN_GRADIENT_HOVER } from "./gradient";
+import {
+    MAIN_GRADIENT,
+    MAIN_GRADIENT_HOVER,
+    SECONDARY_GRADIENT,
+    SECONDARY_GRADIENT_HOVER,
+} from "./gradient";
 
 export function AppHeader() {
     const loca = useLoca();
@@ -24,17 +29,17 @@ export function AppHeader() {
 
         const { user, id } = router.query as { user: string; id: string };
 
-        if (user === "default") {
+        if (user === "local") {
             toast.promise(localforage.setItem(id, activeTemplate), {
                 loading:
-                    loca.localization.constructionTemplate.promiseMessage.updateTitle.loading[
+                    loca.localization.constructionPage.promiseMessage.updateTitle.loading[
                         loca.language
                     ],
                 success:
-                    loca.localization.constructionTemplate.promiseMessage.updateTitle.success[
+                    loca.localization.constructionPage.promiseMessage.updateTitle.success[
                         loca.language
                     ],
-                error: loca.localization.constructionTemplate.promiseMessage.updateTitle.error[
+                error: loca.localization.constructionPage.promiseMessage.updateTitle.error[
                     loca.language
                 ],
             });
@@ -51,14 +56,14 @@ export function AppHeader() {
                 ).json(),
                 {
                     loading:
-                        loca.localization.constructionTemplate.promiseMessage.updateTitle.loading[
+                        loca.localization.constructionPage.promiseMessage.updateTitle.loading[
                             loca.language
                         ],
                     success:
-                        loca.localization.constructionTemplate.promiseMessage.updateTitle.success[
+                        loca.localization.constructionPage.promiseMessage.updateTitle.success[
                             loca.language
                         ],
-                    error: loca.localization.constructionTemplate.promiseMessage.updateTitle.error[
+                    error: loca.localization.constructionPage.promiseMessage.updateTitle.error[
                         loca.language
                     ],
                 }
@@ -71,7 +76,7 @@ export function AppHeader() {
             <header className={"p-6 shadow-md flex items-center"}>
                 <button
                     onClick={(e) => setShowSidebar(true)}
-                    title={loca.localization.constructionTemplate.hamburgerButton[loca.language]}
+                    title={loca.localization.constructionPage.hamburgerButton[loca.language]}
                     className={" transition-colors p-1 rounded-md xl:hover:bg-slate-200"}
                 >
                     <GiHamburgerMenu className={"h-full w-8 text-slate-900"} />
@@ -99,9 +104,9 @@ export function AppHeader() {
                 </div>
             </header>
             {showSidebar ? (
-                <ModalPortal>
-                    <Sidebar closeSidebar={() => setShowSidebar(false)} />
-                </ModalPortal>
+                <FullScreenModal shaded={true}>
+                    <AppSidebar closeSidebar={() => setShowSidebar(false)} />
+                </FullScreenModal>
             ) : null}
         </>
     );
@@ -133,8 +138,11 @@ export function LandingPageHeader() {
                         </NavLink>
                     </div>
                     <div>
-                        <NavLink href={"/signin"} variant={"gradient"}>
+                        {/* <NavLink href={"/signin"} variant={"gradient"}>
                             {loca.localization.landingPage.header.signIn[loca.language]}
+                        </NavLink> */}
+                        <NavLink href={"/app/local"} variant={"gradient"} colorSet={"secondary"}>
+                            {loca.localization.landingPage.header.signInLocal[loca.language]}
                         </NavLink>
                     </div>
                 </div>
@@ -147,20 +155,36 @@ export function NavLink({
     children,
     href,
     variant = "default",
+    colorSet = undefined,
 }: {
     children: ReactNode;
     href: string;
     variant?: "default" | "gradient";
+    colorSet?: "primary" | "secondary" | undefined;
 }) {
-    if (variant === "gradient")
-        return (
-            <Link
-                className={` rounded-md bg-gradient-to-b ${MAIN_GRADIENT} p-3 font-bold text-blue-50 shadow-md shadow-sky-500/50 ${MAIN_GRADIENT_HOVER}`}
-                href={href}
-            >
-                {children}
-            </Link>
-        );
+    if (variant === "gradient") {
+        if (colorSet) {
+            if (colorSet !== "primary") {
+                return (
+                    <Link
+                        className={` rounded-md bg-gradient-to-b ${SECONDARY_GRADIENT} p-3 font-bold text-blue-50 shadow-md shadow-sky-500/50 ${SECONDARY_GRADIENT_HOVER}`}
+                        href={href}
+                    >
+                        {children}
+                    </Link>
+                );
+            } else {
+                return (
+                    <Link
+                        className={` rounded-md bg-gradient-to-b ${MAIN_GRADIENT} p-3 font-bold text-blue-50 shadow-md shadow-sky-500/50 ${MAIN_GRADIENT_HOVER}`}
+                        href={href}
+                    >
+                        {children}
+                    </Link>
+                );
+            }
+        }
+    }
 
     return (
         <Link className={"rounded-md p-1 text-slate-900 hover:xl:bg-slate-200 "} href={href}>

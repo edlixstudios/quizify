@@ -6,7 +6,7 @@ export const useTemplateFetch = (userId: string, templateId: string) => {
     const { data, isLoading } = useSWR(`/fetchTemplate/${userId}/${templateId}`, async () => {
         let template;
 
-        if (userId === "default") {
+        if (userId === "local") {
             template = (await localforage.getItem(templateId)) as FullTemplate;
         } else {
             template = await (

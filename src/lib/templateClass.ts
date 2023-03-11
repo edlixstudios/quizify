@@ -30,7 +30,7 @@ export class TemplateClass {
             id: this.uuid,
             title: this.templateName,
             finish: false,
-            userId: "default",
+            userId: "local",
             template: {},
         };
     }

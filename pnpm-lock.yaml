@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@next-auth/prisma-adapter': ^1.0.5
   '@next/font': 13.1.6
-  '@paypal/paypal-js': ^5.1.4
   '@paypal/react-paypal-js': ^7.8.2
   '@prisma/client': 4.10.1
   '@types/bcrypt': ^5.0.0
@@ -17,6 +16,7 @@ specifiers:
   eslint: 8.34.0
   eslint-config-next: 13.1.6
   framer-motion: ^9.1.6
+  lemonsqueezy.ts: ^0.1.6
   localforage: ^1.10.0
   next: 13.1.6
   next-auth: ^4.19.2
@@ -36,7 +36,6 @@ specifiers:
 dependencies:
   '@next-auth/prisma-adapter': 1.0.5_qpmskah7lm3ildf4stmwh4q42u
   '@next/font': 13.1.6
-  '@paypal/paypal-js': 5.1.4
   '@paypal/react-paypal-js': 7.8.2_biqbaboplfbrettd7655fr4n2y
   '@prisma/client': 4.10.1_prisma@4.10.1
   bcrypt: 5.1.0
@@ -44,6 +43,7 @@ dependencies:
   eslint: 8.34.0
   eslint-config-next: 13.1.6_7kw3g6rralp5ps6mg3uyzz6azm
   framer-motion: 9.1.6_biqbaboplfbrettd7655fr4n2y
+  lemonsqueezy.ts: 0.1.6
   localforage: 1.10.0
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.19.2_3vryta7zmbcsw4rrqf4axjqggm
@@ -705,6 +705,13 @@ packages:
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
+
+  /busboy/1.6.0:
+    resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
+    engines: {node: '>=10.16.0'}
+    dependencies:
+      streamsearch: 1.1.0
+    dev: false
 
   /call-bind/1.0.2:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
@@ -1894,6 +1901,12 @@ packages:
       language-subtag-registry: 0.3.22
     dev: false
 
+  /lemonsqueezy.ts/0.1.6:
+    resolution: {integrity: sha512-G8XgEWJSL2bGU8VKoyrhpFcHb+T/YKu7uNVYo+Ncs3nK7hTAlyiq0zKfXN9zI/MdknnRQeqzSsowgQPZF5OE0g==}
+    dependencies:
+      undici: 5.20.0
+    dev: false
+
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -2648,6 +2661,11 @@ packages:
       internal-slot: 1.0.5
     dev: false
 
+  /streamsearch/1.1.0:
+    resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
+    engines: {node: '>=10.0.0'}
+    dev: false
+
   /string-width/4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -2887,6 +2905,13 @@ packages:
       has-bigints: 1.0.2
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
+    dev: false
+
+  /undici/5.20.0:
+    resolution: {integrity: sha512-J3j60dYzuo6Eevbawwp1sdg16k5Tf768bxYK4TUJRH7cBM4kFCbf3mOnM/0E3vQYXvpxITbbWmBafaDbxLDz3g==}
+    engines: {node: '>=12.18'}
+    dependencies:
+      busboy: 1.6.0
     dev: false
 
   /update-browserslist-db/1.0.10_browserslist@4.21.5:

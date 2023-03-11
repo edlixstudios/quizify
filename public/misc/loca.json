@@ -26,7 +26,7 @@
       "en-US": "Unfinished"
     }
   },
-  "constructionTemplate": {
+  "constructionPage": {
     "hamburgerButton": {
       "de-DE": "Seitennavigation",
       "en-US": "Sidebar"
@@ -57,8 +57,8 @@
         "en-US": "Back"
       },
       "quizes": {
-        "de-DE": "Rätsel",
-        "en-US": "Quizes"
+        "de-DE": "Kategorie",
+        "en-US": "Categorie"
       },
       "questions": {
         "de-DE": "Fragen",
@@ -80,6 +80,10 @@
         "de-DE": "Template löschen",
         "en-US": "Delete template"
       }
+    },
+    "createCategory": {
+      "de-DE": "Neue Quizkategorie erstellen",
+      "en-US": "Create new Quiz category"
     }
   },
   "landingPage": {
@@ -95,16 +99,20 @@
       "signIn": {
         "de-DE": "Anmelden",
         "en-US": "Sign In"
+      },
+      "signInLocal": {
+        "de-DE": "Starte Lokal",
+        "en-US": "Start local"
       }
     },
     "body": {
       "jumboTitleP1": {
-        "de-DE": "Erstelle",
-        "en-US": "Create"
+        "de-DE": "Erstelle atemberaubende",
+        "en-US": "Create stunning"
       },
       "jumboTitleP2": {
-        "de-DE": "atemberaubende Quize",
-        "en-US": "stunning quizes"
+        "de-DE": "Quize",
+        "en-US": "quizes"
       },
       "jumboTitleP3": {
         "de-DE": "innerhalb von",
@@ -232,8 +240,8 @@
       "en-US": "Sign In"
     },
     "free": {
-      "de-DE": "Quizify starten",
-      "en-US": "Start quizify"
+      "de-DE": "Ohne Login starten",
+      "en-US": "Start without login"
     },
     "dividerOr": {
       "de-DE": "oder",

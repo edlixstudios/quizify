@@ -9,11 +9,11 @@ export default function Jumbotron() {
         <LandingPageSection variant="light">
             <div
                 className={
-                    "font-bold text-slate-800 leading-tight text-center text-4xl select-none p-12 md:text-6xl "
+                    "font-bold text-slate-800 text-center text-4xl select-none p-12 md:text-6xl "
                 }
             >
                 {loca.localization.landingPage.body.jumboTitleP1[loca.language]}{" "}
-                <span className={" relative  group"}>
+                <span className={" relative group leading-loose"}>
                     <div
                         className={
                             "absolute left-0 top-0 w-full h-full blur-none md:group-hover:bg-gradient-to-r md:group-hover:from-sky-400/25 md:group-hover:to-blue-500/25  md:group-hover:blur-2xl "

@@ -5,6 +5,8 @@ import useSWR from "swr";
 import LoadingSpinner from "root/components/util/loadingSpinner";
 import { useActiveTemplate } from "root/store/templates";
 import IsValidUserProvider from "root/components/isValidUserProvider";
+import { useLoca } from "root/hooks/loca";
+import NewCategorie from "root/components/constructionPage/newCategorie";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -14,6 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const TemplatePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
     const fetchActiveTemplate = useActiveTemplate((state) => state.fetchActiveTemplate);
+    const { localization, language } = useLoca();
 
     const { isLoading } = useSWR(`/api/templates/${user}/${id}`, async () => {
         await fetchActiveTemplate(user, id);
@@ -26,7 +29,14 @@ const TemplatePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
             <IsValidUserProvider>
                 <AppHeader />
                 <ContentLayout>
-                    <div>Eddy geht diese eine mal richtig gut ab Blja</div>
+                    <div>
+                        <div className={"text-center font-bold text-slate-900 my-8 md:text-4xl"}>
+                            {localization.constructionPage.createCategory[language]}
+                        </div>
+                        <div>
+                            <NewCategorie />
+                        </div>
+                    </div>
                 </ContentLayout>
             </IsValidUserProvider>
         </>

@@ -12,15 +12,17 @@ import {
     MdSpaceDashboard,
 } from "react-icons/md";
 import { useActiveTemplate, useTemplates } from "root/store/templates";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { MAIN_GRADIENT } from "./shared/gradient";
 import { FaUserAlt } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { BsFillCollectionFill } from "react-icons/bs";
 
-interface Sidebar {
+interface AppSidebar {
     closeSidebar: () => void;
 }
 
-export default function Sidebar({ closeSidebar }: Sidebar) {
+export default function AppSidebar({ closeSidebar }: AppSidebar) {
     const loca = useLoca();
     const [animationPosition, setAnimationPosition] = useState<number>(0);
     const offsetPosition = screen.width > 1280 ? -(screen.width / 4) : -screen.width;
@@ -42,14 +44,14 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                         closeSidebar();
                     }
                 }}
-                transition={{ ease: "easeOut" }}
+                transition={{ ease: "easeOut", duration: animationPosition < 0 ? 0.1 : 0.2 }}
                 initial={{ x: offsetPosition }}
                 animate={{ x: animationPosition }}
                 className={"bg-slate-50 h-screen flex flex-col p-4 drop-shadow-lg xl:w-1/4"}
             >
                 <div className={"flex p-2 items-center"}>
                     <div className={"text-2xl font-bold flex-grow text-center"}>
-                        {loca.localization.constructionTemplate.sidebar.title[loca.language]}
+                        {loca.localization.constructionPage.sidebar.title[loca.language]}
                     </div>
                     <button
                         className={
@@ -57,9 +59,7 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                         }
                         onClick={() => setAnimationPosition(offsetPosition)}
                         title={
-                            loca.localization.constructionTemplate.sidebar.backBtnHint[
-                                loca.language
-                            ]
+                            loca.localization.constructionPage.sidebar.backBtnHint[loca.language]
                         }
                     >
                         <AiFillStepBackward className={"text-slate-900"} />
@@ -71,17 +71,13 @@ export default function Sidebar({ closeSidebar }: Sidebar) {
                             icon={<MdDashboardCustomize className={"w-full h-full"} />}
                             href={`/app/${router.query.user}/${router.query.id}/construction`}
                         >
-                            {loca.localization.constructionTemplate.sidebar.quizes[loca.language]}
+                            {loca.localization.constructionPage.sidebar.quizes[loca.language]}
                         </SidebarButton>
                         <SidebarButton
                             icon={<MdQuiz className={"w-full h-full"} />}
                             href={`/app/${router.query.user}/${router.query.id}/construction/question`}
                         >
-                            {
-                                loca.localization.constructionTemplate.sidebar.questions[
-                                    loca.language
-                                ]
-                            }
+                            {loca.localization.constructionPage.sidebar.questions[loca.language]}
                         </SidebarButton>
                     </ul>
 
@@ -111,8 +107,8 @@ export function SidebarButton({ href, children, icon = undefined }: SidebarButto
     return (
         <li
             className={` font-bold p-2 rounded-md group transition-colors ${
-                isPath ? "bg-slate-200 text-slate-900" : "text-slate-500"
-            } xl:hover:bg-slate-300 xl:hover:text-slate-900 `}
+                isPath ? "bg-slate-200 text-slate-900 " : "text-slate-500"
+            } xl:hover:bg-slate-300 xl:hover:text-slate-900 xl:hover:drop-shadow-md `}
         >
             <Link className={"flex items-center"} href={href}>
                 <div className={"flex-grow text-center"}>{children}</div>
@@ -124,6 +120,37 @@ export function SidebarButton({ href, children, icon = undefined }: SidebarButto
                     {icon}
                 </div>
             </Link>
+        </li>
+    );
+}
+
+export function SidebarSignOutButton({
+    children,
+    icon = undefined,
+}: {
+    children: ReactNode;
+    icon: ReactNode;
+}) {
+    const router = useRouter();
+
+    async function handleOnClick() {
+        await signOut({ redirect: false });
+        router.push("/");
+    }
+
+    return (
+        <li
+            className={`font-bold p-2 rounded-md group transition-colors bg-rose-200  text-rose-500 
+            xl:hover:bg-rose-300 xl:hover:text-rose-900 xl:hover:drop-shadow-md `}
+        >
+            <button className={"flex items-center w-full"} onClick={handleOnClick}>
+                <div className={"flex-grow text-center"}>{children}</div>
+                <div
+                    className={`mr-8 h-6 w-6 transition-colors text-rose-500 group-hover:xl:text-rose-900  `}
+                >
+                    {icon}
+                </div>
+            </button>
         </li>
     );
 }
@@ -148,8 +175,8 @@ function TemplateDoneButton() {
             <button className={"flex w-full items-center"} onClick={toggleMarkedButton}>
                 <div className={"flex-grow text-center"}>
                     {activeTemplate?.finish
-                        ? localization.constructionTemplate.sidebar.isDone[language]
-                        : localization.constructionTemplate.sidebar.isNotDone[language]}
+                        ? localization.constructionPage.sidebar.isDone[language]
+                        : localization.constructionPage.sidebar.isNotDone[language]}
                 </div>
                 <div className={`mr-8 h-6 w-6 transition-colors   `}>
                     {activeTemplate?.finish ? (
@@ -173,10 +200,10 @@ function DashboardButton() {
         >
             <Link className={"flex items-center"} href={`/app/${router.query.user}/`}>
                 <div className={"flex-grow text-center"}>
-                    {localization.constructionTemplate.sidebar.dashboard[language]}
+                    {localization.constructionPage.sidebar.dashboard[language]}
                 </div>
                 <div className={`mr-8 h-6 w-6 transition-colors   `}>
-                    <MdDashboardCustomize className={"w-full h-full"} />
+                    <BsFillCollectionFill className={"w-full h-full"} />
                 </div>
             </Link>
         </li>
@@ -200,7 +227,7 @@ function DeleteTemplate() {
         >
             <button className={"flex items-center w-full"} onClick={deleteTemplateHandler}>
                 <div className={"flex-grow text-center"}>
-                    {localization.constructionTemplate.sidebar.delete[language]}
+                    {localization.constructionPage.sidebar.delete[language]}
                 </div>
                 <div className={`mr-8 h-6 w-6 transition-colors   `}>
                     <AiFillDelete className={"w-full h-full"} />
@@ -211,12 +238,11 @@ function DeleteTemplate() {
 }
 
 export function UserPageSidebar() {
-    const session = useSession();
     const router = useRouter();
     const { localization, language } = useLoca();
 
     return (
-        <motion.aside className={"h-screen w-64 shadow-xl"}>
+        <aside className={"h-screen min-w-[16rem] shadow-xl"}>
             <div
                 className={`font-bold p-8 bg-gradient-to-r text-sky-50 text-center drop-shadow-md ${MAIN_GRADIENT}  text-2xl mx-auto`}
             >
@@ -231,7 +257,10 @@ export function UserPageSidebar() {
                     href={`/user/${router.query.userid}/account`}
                     icon={<FaUserAlt className={"h-6 w-6"} />}
                 >{`${localization.userPage.user[language]}`}</SidebarButton>
+                <SidebarSignOutButton
+                    icon={<BiLogOut className={"h-6 w-6"} />}
+                >{`${localization.userPage.user[language]}`}</SidebarSignOutButton>
             </ul>
-        </motion.aside>
+        </aside>
     );
 }

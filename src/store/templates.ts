@@ -28,7 +28,7 @@ export const useTemplates = create<Template>((set) => ({
     createTemplate: async (title, userId) => {
         const template = new TemplateClass(title);
 
-        if (userId === "default") {
+        if (userId === "local") {
             await localforage.setItem(template.getUuid(), template.generateTemplate());
         } else {
             await fetch(`${location.origin}/api/templates/${userId}`, {
@@ -44,7 +44,7 @@ export const useTemplates = create<Template>((set) => ({
     getAllTemplates: async function (userId) {
         let templateData: TemplatePicker[];
 
-        if (userId === "default") {
+        if (userId === "local") {
             templateData = await fetchAllKeys();
         } else {
             templateData = await (await fetch(`${location.origin}/api/templates/${userId}`)).json();
@@ -53,7 +53,7 @@ export const useTemplates = create<Template>((set) => ({
         set((prev) => ({ ...prev, templates: templateData }));
     },
     deleteTemplate: async function (userId, templateId) {
-        if (userId === "default") {
+        if (userId === "local") {
             await localforage.removeItem(templateId);
         } else {
             await (
@@ -75,7 +75,7 @@ export const useActiveTemplate = create<ActiveTemplate>((set) => ({
     activeTemplate: null,
     fetchActiveTemplate: async function (userId, templateId) {
         let fetchedTemplate: FullTemplate;
-        if (userId === "default") {
+        if (userId === "local") {
             fetchedTemplate = (await localforage.getItem(templateId)) as FullTemplate;
         } else {
             fetchedTemplate = (await (
@@ -85,7 +85,7 @@ export const useActiveTemplate = create<ActiveTemplate>((set) => ({
         set((prev) => ({ ...prev, activeTemplate: fetchedTemplate }));
     },
     setActiveTemplate: async function (template) {
-        if (!template.userId || template.userId === "default") {
+        if (!template.userId || template.userId === "local") {
             await localforage.setItem(template.id, template);
         } else {
             const response = await (

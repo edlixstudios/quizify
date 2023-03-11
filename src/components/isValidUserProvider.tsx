@@ -14,10 +14,7 @@ export default function IsValidUserProvider({ children }: IsValidUserProvider) {
     const [returnToIndex, setReturnToIndex] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log("sessionn", session);
-        console.log("returnToIndex", returnToIndex);
-        // console.log("sessionn",session)
-        if (router.query.user !== "default") {
+        if (router.query.user !== "local") {
             if (
                 !session.data ||
                 (session.data?.user as { id: string }).id !== router.query.user ||

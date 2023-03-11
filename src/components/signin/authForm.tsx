@@ -59,7 +59,7 @@ export function StartAppLocal() {
     const [isAppLoading, setIsAppLoading] = useState<boolean>(false);
     function startQuizfyLocal() {
         setIsAppLoading(true);
-        router.push("/app/default");
+        router.push("/app/local");
     }
 
     if (isAppLoading) {

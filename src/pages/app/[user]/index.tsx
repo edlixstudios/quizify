@@ -12,7 +12,7 @@ import IsValidUserProvider from "root/components/isValidUserProvider";
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
-            userId: ctx.query.user ?? "default",
+            userId: ctx.query.user ?? "local",
         },
     };
 };
@@ -54,7 +54,7 @@ export default function AppRoot({ userId }: { userId: string }) {
                 <div className={"fixed bottom-10 right-10"}>
                     <button
                         onClick={async () => {
-                            if (userId !== "default") {
+                            if (userId !== "local") {
                                 await signOut({ redirect: false });
                             }
                             router.push("/");

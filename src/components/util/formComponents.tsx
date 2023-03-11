@@ -1,10 +1,12 @@
-import { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
+import { ComponentPropsWithoutRef, ComponentPropsWithRef, forwardRef, LegacyRef } from "react";
 
 interface CustomInput extends ComponentPropsWithRef<"input"> {
     label?: string;
 }
 
-export function Input({ ref, ...props }: CustomInput) {
+export const Input = forwardRef(InputLayout);
+
+function InputLayout(props: CustomInput, ref: LegacyRef<HTMLInputElement>) {
     if (props.label) {
         return (
             <div className={"flex flex-col"}>

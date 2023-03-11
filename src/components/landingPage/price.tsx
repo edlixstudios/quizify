@@ -36,7 +36,7 @@ export default function Price() {
                         buttonText={localization.landingPage.body.price.free.button[language]}
                         featureList={localization.landingPage.body.price.free.features[language]}
                         onClick={() => {
-                            router.push("/app/default");
+                            router.push("/app/local");
                             setStartingApp(true);
                         }}
                     />
