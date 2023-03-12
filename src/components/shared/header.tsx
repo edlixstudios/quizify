@@ -8,7 +8,7 @@ import { FullTemplate } from "root/lib/templateClass";
 import { toast } from "react-hot-toast";
 import localforage from "localforage";
 import AppSidebar from "../sidebar";
-import ModalPortal, { FullScreenModal } from "./modalPortal";
+import { FullScreenModal } from "./modalPortal";
 import Link from "next/link";
 import {
     MAIN_GRADIENT,
@@ -30,7 +30,7 @@ export function AppHeader() {
         const { user, id } = router.query as { user: string; id: string };
 
         if (user === "local") {
-            toast.promise(localforage.setItem(id, activeTemplate), {
+            await toast.promise(localforage.setItem(id, activeTemplate), {
                 loading:
                     loca.localization.constructionPage.promiseMessage.updateTitle.loading[
                         loca.language
@@ -44,7 +44,7 @@ export function AppHeader() {
                 ],
             });
         } else {
-            toast.promise(
+            await toast.promise(
                 (
                     await fetch(`${location.origin}/api/templates/${user}/${id}`, {
                         method: "PUT",
@@ -75,7 +75,7 @@ export function AppHeader() {
         <>
             <header className={"p-6 shadow-md flex items-center"}>
                 <button
-                    onClick={(e) => setShowSidebar(true)}
+                    onClick={() => setShowSidebar(true)}
                     title={loca.localization.constructionPage.hamburgerButton[loca.language]}
                     className={" transition-colors p-1 rounded-md xl:hover:bg-slate-200"}
                 >

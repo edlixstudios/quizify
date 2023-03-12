@@ -6,9 +6,11 @@ import LoadingSpinner from "root/components/util/loadingSpinner";
 import { useActiveTemplate } from "root/store/templates";
 import IsValidUserProvider from "root/components/isValidUserProvider";
 import { useLoca } from "root/hooks/loca";
-import QuizType, {
-  ExplanationText,
-} from "root/components/constructionPage/quizType";
+import NewCategories, {
+  Category,
+} from "root/components/constructionPage/newCategory";
+import React from "react";
+import { useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
@@ -16,14 +18,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const QuizTypePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
+const CategoryPage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
+  const { localization, language } = useLoca();
+  const router = useRouter();
+  const activeTemplate = useActiveTemplate((state) => state.activeTemplate);
   const fetchActiveTemplate = useActiveTemplate(
     (state) => state.fetchActiveTemplate
   );
-  const { localization, language } = useLoca();
 
   const { isLoading } = useSWR(`/api/templates/${user}/${id}`, async () => {
     await fetchActiveTemplate(user, id);
+
+    if (activeTemplate?.type !== "multipleCategories") {
+      router.push(`/app/${user}/${id}/construction`);
+    }
   });
 
   if (isLoading) return <LoadingSpinner />;
@@ -35,29 +43,24 @@ const QuizTypePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
         <ContentLayout>
           <div>
             <div
-              className={"text-center font-bold text-slate-900 my-8 text-4xl "}
-            >
-              {localization.constructionPage.pickQuizType[language]}
-            </div>
-            <div
               className={
-                "grid grid-cols-1 gap-8 justify-around p-8 md:grid-cols-3"
+                "text-center font-bold text-slate-900 my-8 md:text-4xl"
               }
             >
-              <QuizType
-                type={"singleCategory"}
-                title={localization.constructionPage.singleType[language]}
-              />
-              <QuizType
-                type={"multipleCategories"}
-                title={localization.constructionPage.multiple[language]}
-              />
-              <QuizType
-                type={"scored"}
-                title={localization.constructionPage.scored[language]}
-              />
+              {localization.constructionPage.createCategory[language]}
             </div>
-            <ExplanationText />
+            <NewCategories />
+            <div
+              className={
+                "p-12 grid gap-8 grid-cols-1 md:grid-cols-5 xl:grid-cols-7"
+              }
+            >
+              {activeTemplate && Object.keys(activeTemplate.template).length > 0
+                ? Object.keys(activeTemplate.template).map((e) => (
+                    <Category key={e} title={e} />
+                  ))
+                : null}
+            </div>
           </div>
         </ContentLayout>
       </IsValidUserProvider>
@@ -65,4 +68,4 @@ const QuizTypePage: NextPage<{ user: string; id: string }> = ({ user, id }) => {
   );
 };
 
-export default QuizTypePage;
+export default CategoryPage;

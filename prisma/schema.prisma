@@ -47,6 +47,7 @@ model Template {
   id       String  @id @default(uuid())
   userId   String
   title    String
+  type      TemplateType
   finish   Boolean
   template Json
 
@@ -64,4 +65,9 @@ model Payment {
   nextBillingTime DateTime
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum TemplateType{
+singleCategory
+multipleCategories
 }

@@ -38,11 +38,11 @@
           "en-US": "Title successfully updated"
         },
         "loading": {
-          "de-DE": "Aktualliere Titel",
+          "de-DE": "Aktuallisiere Titel",
           "en-US": "Updating title"
         },
         "error": {
-          "de-DE": "Fehler beim aktualliseren des Titels",
+          "de-DE": "Fehler beim aktuallisieren des Titels",
           "en-US": "Error on updating title"
         }
       }
@@ -56,13 +56,21 @@
         "de-DE": "Zurück",
         "en-US": "Back"
       },
-      "quizes": {
+      "quizType": {
+        "de-DE": "Quiz Art",
+        "en-US": "Quiz Type"
+      },
+      "category": {
         "de-DE": "Kategorie",
-        "en-US": "Categorie"
+        "en-US": "Category"
       },
       "questions": {
         "de-DE": "Fragen",
         "en-US": "Questions"
+      },
+      "design": {
+        "de-DE": "Darstellung",
+        "en-US": "Design"
       },
       "dashboard": {
         "de-DE": "Template Sammlung",
@@ -81,6 +89,36 @@
         "en-US": "Delete template"
       }
     },
+    "pickQuizType": {
+      "de-DE": "Wähle eine Quizart",
+      "en-US": "Pick a quiz type"
+    },
+    "singleType": {
+      "de-DE": "Einfacher Quiz",
+      "en-US": "Simple Quiz"
+    },
+    "multiple": {
+      "de-DE": "Quiz mit mehreren Kategorien",
+      "en-US": "Quiz with multiple Categories"
+    },
+    "scored": {
+      "de-DE": "Quiz mit Punktesystem",
+      "en-US": "Quiz with Point System"
+    },
+    "explanationText": {
+      "single": {
+        "de-DE": "Erstelle ein einfaches Quiz ähnlich im Stil von Wer wird Millionär",
+        "en-US": "Create a simple quiz with a style like in 'Who Wants to Be a Millionaire'"
+      },
+      "multiple": {
+        "de-DE": "Erstelle ein komplexes Quiz mit mehreren verschiedenen Kategorien oder Spezialitäten",
+        "en-US": "Create a complex quiz with several different categories or specialties"
+      },
+      "scored": {
+        "de-DE": "Erstelle ein Quiz mit Punktesystem",
+        "en-US": "Create a quiz with a Point System"
+      }
+    },
     "createCategory": {
       "de-DE": "Neue Quizkategorie erstellen",
       "en-US": "Create new Quiz category"
@@ -93,7 +131,7 @@
         "en-US": "Features"
       },
       "prices": {
-        "de-DE": "Preis",
+        "de-DE": "Preise",
         "en-US": "Price"
       },
       "signIn": {
@@ -106,13 +144,17 @@
       }
     },
     "body": {
+      "desc": {
+        "de-DE": "{0} ist deine All-in-One Lösung um Quizze für Schulungszwecken zu erstellen. Egal wie komplex, mit {0} werden alle deine Anforderungen gedeckt. Und das für einen kleinen Preis.",
+        "en-US": "{0} is your All-in-One solution to create quizzes for training purposes. No matter how complex, with {0} all your needs are covered. And all that for a small price."
+      },
       "jumboTitleP1": {
         "de-DE": "Erstelle atemberaubende",
         "en-US": "Create stunning"
       },
       "jumboTitleP2": {
         "de-DE": "Quize",
-        "en-US": "quizes"
+        "en-US": "quizzes"
       },
       "jumboTitleP3": {
         "de-DE": "innerhalb von",
@@ -131,6 +173,7 @@
           "de-DE": "Erstelle lokal kostenlos so viele Quizzes wie du willst",
           "en-US": "Create local as much quizzes you want for free"
         },
+
         "free": {
           "title": {
             "de-DE": "Kostenlos",
@@ -141,8 +184,8 @@
             "en-US": "Starter"
           },
           "desc": {
-            "de-DE": "Perfekt solange die Quizzes an einem Rechner durchgeführt werden",
-            "en-US": "Perfeclty if you use one device for your quizzes"
+            "de-DE": "Perfekt solange die Quizze an einem Gerät durchgeführt werden",
+            "en-US": "Perfectly if you use one device for your quizzes"
           },
           "button": {
             "de-DE": "Starte direkt los",
@@ -176,11 +219,15 @@
             "de-DE": "Melde dich an",
             "en-US": "Sign in"
           },
+          "comingSoon": {
+            "de-DE": "In Entwicklung",
+            "en-US": "In development"
+          },
           "features": {
             "de-DE": [
               "Alle Features von Starter",
-              "Speicher 5 Quizzes in der Cloud",
-              "Nutze Bilder in deinen Quizzes"
+              "Speicher bis zu 5 Quizze in der Cloud",
+              "Nutze Bilder in deinen Quizze"
             ],
             "en-US": [
               "All features of starter",
@@ -192,7 +239,7 @@
         "large": {
           "title": {
             "de-DE": "10€ / Monat",
-            "en-US": "10$ / Month"
+            "en-US": "10€ / Month"
           },
           "subTitle": {
             "de-DE": "Quiz Master",
@@ -206,26 +253,64 @@
             "de-DE": "Melde dich an",
             "en-US": "Sign in"
           },
+          "comingSoon": {
+            "de-DE": "In Entwicklung",
+            "en-US": "In development"
+          },
           "features": {
             "de-DE": [
               "Alle Features von Quiz Enthusiast",
               "Unbegrenzt Quizze in der Cloud abspeichern",
-              "Nutze Videos in Quizze"
+              "Nutze Videos in Quizze",
+              "Mache Quizze öffentlich aufrufbar",
+              "Generiere QR-Codes zum verlinken deiner Quizze"
             ],
             "en-US": [
               "All features of Quiz Enthusiast",
               "Unlimited quizzes in the cloud",
-              "Use videos in your quizzes"
+              "Use videos in your quizzes",
+              "Make your Quizzes public accessible",
+              "Generate your Link as QR-Code"
             ]
           }
         }
+      },
+      "featureSection": {
+        "title": {
+          "de-DE": "Features",
+          "en-US": "Features"
+        },
+        "featureSet": [
+          {
+            "id": 1,
+            "title": {
+              "de-DE": "Verschiedene Quiz Typen",
+              "en-US": "Different Quiz Types"
+            },
+            "desc": {
+              "de-DE": "Erstelle verschiedene Arten von Quizze. Egal ob ein simples Quiz, mehrere Kategorien oder sogar mit einem Punktesystem",
+              "en-US": "Create different types of Quizzes. Whether it's a simple quiz, multiple categories, or even with a point system"
+            }
+          },
+          {
+            "id": 2,
+            "title": {
+              "de-DE": "Teile dein Quiz",
+              "en-US": "Share your Quiz"
+            },
+            "desc": {
+              "de-DE": "Mit nur einem Klick lässt sich dein Quiz auch öffentlich und ohne Anmeldung nutzen. Zusätzlich wird ein QR-Code generiert mit dem das Teilen noch einfacher wird",
+              "en-US": "With just one click, your quiz can also be used publicly and without registration. In addition, a QR code is generated which makes sharing even easier."
+            }
+          }
+        ]
       }
     }
   },
   "signInPage": {
     "title": {
       "de-DE": "Mache hier eins Login",
-      "en-US": "Register here biatch"
+      "en-US": "Register now"
     },
     "email": {
       "de-DE": "Email",
@@ -260,6 +345,20 @@
     "user": {
       "de-DE": "Account",
       "en-US": "Account"
+    }
+  },
+  "popup": {
+    "override": {
+      "de-DE": "Achtung! Durch das umstellen, werden alle getätigten Einstellungen unwiderruflich gelöscht. Möchtest du den Typ trotzdem umstellen?",
+      "en-US": "Attention! By switching the Quiz Type your data will be deleted. Do you want to change the type anyway?"
+    },
+    "yes": {
+      "de-DE": "Ja",
+      "en-US": "Yes"
+    },
+    "no": {
+      "de-DE": "Nein",
+      "en-US": "No"
     }
   }
 }

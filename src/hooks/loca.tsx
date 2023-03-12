@@ -5,11 +5,15 @@ import { useState } from "react";
 type LanguageTypes = "de-DE" | "en-US";
 
 export const useLoca = () => {
-    const router = useRouter();
-    const [localization, _] = useState<typeof loca>(loca);
+  const router = useRouter();
+  const [localization, _] = useState<typeof loca>(loca);
 
-    return {
-        localization: localization,
-        language: router.locale as LanguageTypes,
-    };
+  return {
+    localization: localization,
+    language: router.locale as LanguageTypes,
+  };
+};
+
+export const useLocaReplacer = (locaString: string, replaceValue: string) => {
+  return locaString.replaceAll("{0}", replaceValue);
 };

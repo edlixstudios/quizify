@@ -37,7 +37,7 @@ interface CustomButton extends ComponentPropsWithoutRef<"button"> {}
 
 export function Button({ ...props }: CustomButton) {
     return (
-        <button {...props} className={`p-2 font-bold rounded-md transition-all ${props.className}`}>
+        <button {...props} className={`p-2 font-bold rounded-md transition-all ${props.className} disabled:bg-slate-300 disabled:text-slate-500 xl:hover:disabled:bg-slate-400`}>
             {props.children}
         </button>
     );
