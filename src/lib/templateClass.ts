@@ -5,15 +5,27 @@ export interface FullTemplate {
   title: string;
   finish: boolean;
   userId: string;
-  template: Template | Category;
+  template: SingleCategoryQuiz | MultipleCategoriesQuiz;
   type: TemplateTypes;
 }
 
-type Template = Record<string, Category>;
+export type SingleCategoryQuiz = Omit<Category, "image" | "name">;
+
+export type MultipleCategoriesQuiz = {
+  categories: Record<string, Category>;
+};
 
 type Category = {
   name: string;
-  image?: string;
+  image: string;
+  questions: Question[];
+};
+
+export type Question = {
+  question: string;
+  possibleAnswers: string[];
+  media?: string;
+  correctAnswer: string | number;
 };
 
 export type TemplateTypes = "singleCategory" | "multipleCategories" | "scored";
@@ -40,16 +52,21 @@ export class TemplateClass {
       finish: false,
       type: "singleCategory",
       userId: "local",
-      template: {},
+      template: {
+        questions: [],
+      },
     };
   }
 }
 
 export class CategoryClass {
-  constructor(public fullTemplate: FullTemplate, public categoryName: string) {
-    (fullTemplate.template as Template)[categoryName] = {
-      name: categoryName,
-    };
+  constructor(
+    public fullTemplate: FullTemplate,
+    categoryName: string,
+    image: string
+  ) {
+    (fullTemplate.template as MultipleCategoriesQuiz).categories[categoryName] =
+      { name: categoryName, image, questions: [] };
   }
 
   public getCategory(): FullTemplate {

@@ -122,6 +122,38 @@
     "createCategory": {
       "de-DE": "Neue Quizkategorie erstellen",
       "en-US": "Create new Quiz category"
+    },
+    "questions": {
+      "title": {
+        "de-DE": "Erstelle hier deine Fragen für dein Quiz",
+        "en-US": "Create your Quiz Questions here"
+      },
+      "createNew": {
+        "de-DE": "Neue Frageseite erstellen",
+        "en-US": "Create new Quiz Page"
+      },
+      "questionForm": {
+        "question": {
+          "de-DE": "Frage",
+          "en-US": "Question"
+        },
+        "correctAnswer": {
+          "de-DE": "Richtige Antwort",
+          "en-US": "Correct Answer"
+        },
+        "media": {
+          "de-DE": "Multimedia",
+          "en-US": "Media"
+        },
+        "possibleAnswers": {
+          "de-DE": "Mögliche Antworten",
+          "en-US": "Possible Answers"
+        },
+        "answer": {
+          "de-DE": "Antwort ",
+          "en-US": "Answer"
+        }
+      }
     }
   },
   "landingPage": {

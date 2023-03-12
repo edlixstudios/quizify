@@ -7,7 +7,7 @@ import {
   SECONDARY_GRADIENT,
   SECONDARY_GRADIENT_HOVER,
 } from "root/components/shared/gradient";
-import { TemplateTypes } from "root/lib/templateClass";
+import { MultipleCategoriesQuiz, TemplateTypes } from "root/lib/templateClass";
 import { useActiveTemplate } from "root/store/templates";
 import { useLoca } from "root/hooks/loca";
 import { useEffect, useState } from "react";
@@ -62,11 +62,34 @@ export default function QuizType({ title, type }: QuizType) {
                 <div className={"p-8 grid grid-cols-2 gap-4 mt-8"}>
                   <button
                     onClick={() => {
-                      setActiveTemplate({
-                        ...activeTemplate!,
-                        type,
-                        template: {},
-                      });
+                      switch (type) {
+                        case "singleCategory":
+                          setActiveTemplate({
+                            ...activeTemplate!,
+                            type,
+                            template: {
+                              questions: [],
+                            },
+                          });
+                          break;
+                        case "multipleCategories":
+                          setActiveTemplate({
+                            ...activeTemplate!,
+                            type,
+                            template: {} as MultipleCategoriesQuiz,
+                          });
+                          break;
+                        default:
+                          setActiveTemplate({
+                            ...activeTemplate!,
+                            type,
+                            template: {
+                              questions: [],
+                            },
+                          });
+                          break;
+                      }
+
                       setShowOverrideModal(false);
                     }}
                     className={`p-2 rounded-md bg-gradient-to-r text-emerald-50 ${SECONDARY_GRADIENT} ${SECONDARY_GRADIENT_HOVER}`}

@@ -19,7 +19,8 @@ export default function NewCategory() {
 
     if (!activeTemplate || !categoryName) return;
 
-    const category = new CategoryClass(activeTemplate, categoryName);
+    // TODO: Add Image
+    const category = new CategoryClass(activeTemplate, categoryName, "");
     const newTemplate = category.getCategory();
     setActiveTemplate({ ...newTemplate });
 
